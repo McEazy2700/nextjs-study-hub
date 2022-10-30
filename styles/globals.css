@@ -1,4 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .wave-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 85px;
+  }
+
+  .wave-bottom .shape-fill {
+    fill: #B4CDED;
+  }
+  .wave-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave-top svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 153px;
+  }
+
+  .wave-top .shape-fill {
+    fill: #B4CDED;
+  }
+  .wave-right-angled {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave-right-angled svg {
+    position: relative;
+    display: block;
+    width: calc(104% + 1.3px);
+    height: 208px;
+    transform: rotateY(180deg);
+  }
+
+  .wave-right-angled .shape-fill {
+    fill: #B4CDED;
+  }
+}
