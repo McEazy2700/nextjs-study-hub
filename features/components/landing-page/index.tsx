@@ -3,9 +3,9 @@ import Hero from "./hero"
 const LandingPage = ()=>{
 
   return (
-    <main>
+    <section>
       <Hero />
-    </main>
+    </section>
   )
 }
 
