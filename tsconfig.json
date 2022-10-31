@@ -21,7 +21,8 @@
       "@features/*": ["features/*"],
       "@landingPage/*": ["features/components/landing-page/*"],
       "@bank/*": ["features/components/bank/*"],
-      "@layouts/*": ["features/layouts/*"]
+      "@layouts/*": ["features/layouts/*"],
+      "@gql/*": ["graphql/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
