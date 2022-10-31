@@ -52,8 +52,8 @@ const SignUp: PageWithLayout = () => {
           const token = resp.data.register.token ?? ""
           const refreshToken = resp.data.register.refreshToken ?? ""
           setAuthToken(token, refreshToken)
+          router.replace('/signin')
         }
-        router.replace('/signin')
       })
   }
   if (loading) {
@@ -65,13 +65,18 @@ const SignUp: PageWithLayout = () => {
         <form 
           onSubmit={signUpHandler}
           className='flex flex-col items-center justify-center gap-4 border-2 p-5 rounded-[3rem]'>
-          <div className='mb-3 flex gap-3 w-full'>
-            <label className='bg-dark-bg rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center '>Username</label>
-            <input
-              ref={usernameRef}
-              required
-              className='bg-transparent border-2 flex-1 rounded-[5rem] w-full p-2 md:p-5 text-dark-bg focus:shadow-xl transition-all shadow-dark-bg'
-              type="text" id='username' placeholder='LittleDev' />
+          <div className='flex flex-col gap-3 w-full'>
+            <div className='mb-3 flex gap-3 w-full'>
+              <label className='bg-dark-bg rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center '>Username</label>
+              <input
+                ref={usernameRef}
+                required
+                className='bg-transparent border-2 flex-1 rounded-[5rem] w-full p-2 md:p-5 text-dark-bg focus:shadow-xl transition-all shadow-dark-bg'
+                type="text" id='username' placeholder='LittleDev' />
+            </div>
+            {data?.register.errors && data.register.errors.username &&
+              <ErrorMessage errors={data.register.errors.username}/>
+            }
           </div>
           <div className='flex flex-col gap-3 w-full'>
             <div className='mb-3 flex gap-3 w-full'>
@@ -94,7 +99,7 @@ const SignUp: PageWithLayout = () => {
                 <input
                   ref={pass1Ref}
                   required
-                  className='bg-transparent p-2 md:p-5 flex-1 outline-none px-5 w-full text-dark-bg'
+                  className='bg-transparent p-2 rounded-[5rem] md:p-5 flex-1 outline-none px-5 w-full text-dark-bg'
                   type="password" id='password' placeholder='Password' />
               </div>
               {data?.register.errors && data.register.errors.password2 &&
@@ -107,7 +112,7 @@ const SignUp: PageWithLayout = () => {
                 ref={pass2Ref}
                 required
                 onChange={passwordChangeHandler}
-                className='bg-transparent p-2 md:p-5 flex-1 outline-none px-5 w-full text-dark-bg'
+                className='bg-transparent p-2 md:p-5 rounded-[5rem] flex-1 outline-none px-5 w-full text-dark-bg'
                 type="password" id='password' placeholder='Confirm Password' />
             </div>
           </div>

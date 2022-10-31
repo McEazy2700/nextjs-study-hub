@@ -1,10 +1,20 @@
 import React, { useRef, useState } from "react"
 import Link from "next/link"
 import { emailValidator } from "@features/utils/validators/components"
+import { MutationTokenAuthArgs } from "@gql/types/graphql"
+import { useSignIn } from "@gql/hooks/auth"
+import { ErrorMessage } from '@components/bank/errors'
+import { useRouter } from "next/router"
 
+const initialInput:MutationTokenAuthArgs = {
+  email: '',
+  password: ''
+}
 const SignInPage = ()=>{
   const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>
   const pass1Ref = useRef() as React.MutableRefObject<HTMLInputElement>
+  const router = useRouter()
+  const [signInUser, { loading, data }] = useSignIn(initialInput)
   const [emailColor, setEmailColor] = useState('dark-bg')
   const validateEmail = ()=>{
     const validEmail = emailValidator(emailRef)
@@ -14,8 +24,21 @@ const SignInPage = ()=>{
       setEmailColor('red-600')
     }
   }
-  const signInHandler = ()=>{
-
+  const signInHandler: React.FormEventHandler = (event)=>{
+    event.preventDefault()
+    signInUser({
+      variables: {
+        email: emailRef.current.value.toLowerCase(),
+        password: pass1Ref.current.value
+      }
+    }).then(resp => {
+        if (resp.data?.signin.success) {
+          router.replace('/user/dashboard')
+        }
+      })
+  }
+  if (loading){
+    return <div>Loading....</div>
   }
   return (
 
@@ -34,9 +57,6 @@ const SignInPage = ()=>{
                 className='bg-transparent border-2 flex-1 rounded-[5rem] p-2 md:p-5 w-full text-dark-bg focus:shadow-xl transition-all shadow-dark-bg'
                 type="email" id='email' placeholder='idev@gmail.com' />
             </div>
-            {/* {data?.register.errors && data.register.errors.email && */}
-            {/*   <ErrorMessage errors={data.register.errors.email}/> */}
-            {/* } */}
           </div>
           <div className='flex flex-col w-full gap-5'>
             <div className='flex flex-col gap-3 w-full'>
@@ -45,17 +65,17 @@ const SignInPage = ()=>{
                 <input
                   ref={pass1Ref}
                   required
-                  className='bg-transparent p-2 md:p-5 flex-1 outline-none px-5 w-full text-dark-bg'
+                  className='bg-transparent rounded-[5rem] p-2 md:p-5 flex-1 outline-none px-5 w-full text-dark-bg'
                   type="password" id='password' placeholder='Password' />
               </div>
-              {/* {data?.register.errors && data.register.errors.password2 && */}
-              {/*   <ErrorMessage errors={data.register.errors.password2}/> */}
-              {/* } */}
+              {data?.signin.errors && data.signin.errors.nonFieldErrors &&
+                <ErrorMessage errors={data.signin.errors.nonFieldErrors}/>
+              }
             </div>
           </div>
           <button
            type='submit'
-            className='bg-primary p-5 w-full rounded-[5rem] active:bg-primary/60 hover:bg-primary/60 transition-all'>Sign up</button>
+            className='bg-primary p-5 w-full rounded-[5rem] active:bg-primary/60 hover:bg-primary/60 transition-all'>Sign in</button>
           <p className='text-dark-bg'>Do not have an account? <Link className='text-primary' href="/signup">Sign up</Link></p>
         </form>
       </div>
