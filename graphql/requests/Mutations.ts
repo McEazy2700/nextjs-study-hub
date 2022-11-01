@@ -31,6 +31,10 @@ export const SIGN_IN = gql`
         pk
         username
         email
+        profile {
+          id
+          imageUrl
+        }
       }
     }
   }

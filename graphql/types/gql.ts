@@ -4,9 +4,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 
 const documents = {
     "\n  mutation Register(\n    $username: String!\n    $email: String!\n    $password1: String!\n    $password2: String!\n  ) {\n    register(\n      username: $username\n      email: $email\n      password1: $password1\n      password2: $password2\n    ) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n": types.RegisterDocument,
+    "\n  mutation Login($email: String!, $password: String!) {\n    signin: tokenAuth(email: $email, password: $password) {\n      token\n      success\n      errors\n      user {\n        pk\n        username\n        email\n        profile {\n          id\n          imageUrl\n        }\n      }\n    }\n  }\n": types.LoginDocument,
 };
 
 export function graphql(source: "\n  mutation Register(\n    $username: String!\n    $email: String!\n    $password1: String!\n    $password2: String!\n  ) {\n    register(\n      username: $username\n      email: $email\n      password1: $password1\n      password2: $password2\n    ) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n"): (typeof documents)["\n  mutation Register(\n    $username: String!\n    $email: String!\n    $password1: String!\n    $password2: String!\n  ) {\n    register(\n      username: $username\n      email: $email\n      password1: $password1\n      password2: $password2\n    ) {\n      success\n      errors\n      token\n      refreshToken\n    }\n  }\n"];
+export function graphql(source: "\n  mutation Login($email: String!, $password: String!) {\n    signin: tokenAuth(email: $email, password: $password) {\n      token\n      success\n      errors\n      user {\n        pk\n        username\n        email\n        profile {\n          id\n          imageUrl\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation Login($email: String!, $password: String!) {\n    signin: tokenAuth(email: $email, password: $password) {\n      token\n      success\n      errors\n      user {\n        pk\n        username\n        email\n        profile {\n          id\n          imageUrl\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string): unknown;
 export function graphql(source: string) {

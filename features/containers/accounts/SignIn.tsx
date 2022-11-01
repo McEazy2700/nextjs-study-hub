@@ -5,6 +5,9 @@ import { MutationTokenAuthArgs } from "@gql/types/graphql"
 import { useSignIn } from "@gql/hooks/auth"
 import { ErrorMessage } from '@components/bank/errors'
 import { useRouter } from "next/router"
+import { useAppDispatch } from "@features/store/hooks"
+import { setUser } from "@features/store/slices/userSlice"
+import { prepUserData } from "@features/store/helpers/users"
 
 const initialInput:MutationTokenAuthArgs = {
   email: '',
@@ -16,6 +19,7 @@ const SignInPage = ()=>{
   const router = useRouter()
   const [signInUser, { loading, data }] = useSignIn(initialInput)
   const [emailColor, setEmailColor] = useState('dark-bg')
+  const dispatch = useAppDispatch()
   const validateEmail = ()=>{
     const validEmail = emailValidator(emailRef)
     if (validEmail) {
@@ -32,7 +36,8 @@ const SignInPage = ()=>{
         password: pass1Ref.current.value
       }
     }).then(resp => {
-        if (resp.data?.signin.success) {
+        if (resp.data?.signin.success && resp.data?.signin.user) {
+          dispatch(setUser(prepUserData(resp.data.signin.user)))
           router.replace('/user/dashboard')
         }
       })

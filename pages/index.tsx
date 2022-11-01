@@ -2,7 +2,8 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import LandingPage from '@containers/landing-page'
 
-const Home: NextPage = () => {
+
+const Home: NextPage = (_props) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <Head>
@@ -18,3 +19,9 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export async function getStaticProps(){
+  return {
+    props: {}
+  }
+}

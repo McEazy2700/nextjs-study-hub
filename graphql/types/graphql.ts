@@ -102,7 +102,7 @@ export type CreateUpdateResourceMuations = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-/** An enumeration of the days of the week. */
+/** An enumeration. */
 export enum DaysOfTheWeek {
   Friday = 'Friday',
   Monday = 'Monday',
@@ -180,6 +180,11 @@ export type Mutation = {
    * Also, if user has not been verified yet, verify it.
    */
   passwordReset?: Maybe<PasswordReset>;
+  /**
+   * Creates, updates and returns a `Profile` object.
+   * To perform an update, all you have to do is pass the profile `id`.
+   */
+  profileCreateUpdate?: Maybe<ProfileCreateUpdateMutation>;
   /**
    * Register user with fields defined in the settings.
    *
@@ -349,6 +354,12 @@ export type MutationPasswordResetArgs = {
 };
 
 
+export type MutationProfileCreateUpdateArgs = {
+  image?: InputMaybe<Scalars['Upload']>;
+  profileId?: InputMaybe<Scalars['ID']>;
+};
+
+
 export type MutationRegisterArgs = {
   email: Scalars['String'];
   password1: Scalars['String'];
@@ -455,6 +466,23 @@ export type PasswordReset = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+/**
+ * Creates, updates and returns a `Profile` object.
+ * To perform an update, all you have to do is pass the profile `id`.
+ */
+export type ProfileCreateUpdateMutation = {
+  __typename?: 'ProfileCreateUpdateMutation';
+  profile?: Maybe<ProfileType>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+export type ProfileType = {
+  __typename?: 'ProfileType';
+  id: Scalars['ID'];
+  /** image url */
+  imageUrl?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Returns all public Todo lists */
@@ -470,6 +498,7 @@ export type Query = {
   /** Returns a list of todos create by the logged in user */
   getUserTodoList?: Maybe<Array<Maybe<TodoType>>>;
   me?: Maybe<UserNode>;
+  profile?: Maybe<ProfileType>;
   /** Returns all publicly available resources */
   publicResources?: Maybe<Array<Maybe<ResourceType>>>;
   user?: Maybe<UserType>;
@@ -776,6 +805,7 @@ export type UserNode = Node & {
   lastLogin?: Maybe<Scalars['DateTime']>;
   lastName: Scalars['String'];
   pk?: Maybe<Scalars['Int']>;
+  profile?: Maybe<ProfileType>;
   resourceSet: Array<ResourceType>;
   secondaryEmail?: Maybe<Scalars['String']>;
   sectionSet: Array<SectionType>;
@@ -835,5 +865,14 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'Register', success?: boolean | null, errors?: any | null, token?: string | null, refreshToken?: string | null } | null };
 
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', signin?: { __typename?: 'ObtainJSONWebToken', token?: string | null, success?: boolean | null, errors?: any | null, user?: { __typename?: 'UserNode', pk?: number | null, username: string, email: string, profile?: { __typename?: 'ProfileType', id: string, imageUrl?: string | null } | null } | null } | null };
+
 
 export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password1"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password2"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password1"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password1"}}},{"kind":"Argument","name":{"kind":"Name","value":"password2"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password2"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"refreshToken"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"signin"},"name":{"kind":"Name","value":"tokenAuth"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"errors"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pk"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}}]}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
