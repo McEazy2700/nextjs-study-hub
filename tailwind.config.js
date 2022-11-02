@@ -15,7 +15,8 @@ module.exports = {
         accent: "#B4CDED",
         fade: "#696984",
         dark: {
-          bg: "#0D1821",
+          accent: "#0D1821",
+          bg: "#344966"
         }
       },
       fontFamily: {

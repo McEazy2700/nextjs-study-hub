@@ -6,6 +6,10 @@ export const getToken = ()=>{
   return getCookie('token')
 }
 
+export const getRefreshToken = ()=>{
+  return getCookie('refresh')
+}
+
 export const setAuthToken = (token: string, refresh: string)=>{
   setCookie('token', token)
   setCookie('refresh', refresh)

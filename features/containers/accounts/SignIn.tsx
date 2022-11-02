@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import { useAppDispatch } from "@features/store/hooks"
 import { setUser } from "@features/store/slices/userSlice"
 import { prepUserData } from "@features/store/helpers/users"
+import { setAuthToken } from "@features/utils/cookies"
 
 const initialInput:MutationTokenAuthArgs = {
   email: '',
@@ -17,7 +18,7 @@ const SignInPage = ()=>{
   const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>
   const pass1Ref = useRef() as React.MutableRefObject<HTMLInputElement>
   const router = useRouter()
-  const [signInUser, { loading, data }] = useSignIn(initialInput)
+  const [signInUser, { loading, data, error }] = useSignIn(initialInput)
   const [emailColor, setEmailColor] = useState('dark-bg')
   const dispatch = useAppDispatch()
   const validateEmail = ()=>{
@@ -39,11 +40,20 @@ const SignInPage = ()=>{
         if (resp.data?.signin.success && resp.data?.signin.user) {
           dispatch(setUser(prepUserData(resp.data.signin.user)))
           router.replace('/user/dashboard')
+          setAuthToken(
+            resp.data.signin.token ?? "", 
+            resp.data.signin.refreshToken ?? "")
         }
       })
   }
   if (loading){
     return <div>Loading....</div>
+  }
+  if (error) {
+    return (
+    <div className="fixed inset-0 flex items-center justify-center">
+      <h3 className="bg-red-500/80 p-10 rounded-lg">{error.message}</h3>
+    </div>)
   }
   return (
 

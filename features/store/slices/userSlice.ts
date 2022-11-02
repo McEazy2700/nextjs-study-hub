@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from '@store/config'
 
 export interface Profile {
   pk: number | string,
@@ -41,4 +42,5 @@ const userSlice = createSlice({
 })
 
 export const { setUser } = userSlice.actions
+export const selectUser = (state: RootState) => state.users
 export default userSlice.reducer

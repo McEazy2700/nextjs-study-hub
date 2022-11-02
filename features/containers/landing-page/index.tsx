@@ -4,7 +4,7 @@ import WhatIs from "@components/landing-page/what-is"
 const LandingPage = ()=>{
 
   return (
-    <section>
+    <section className="dark:bg-dark-accent">
       <Hero />
       <WhatIs />
     </section>
