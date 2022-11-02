@@ -14,3 +14,20 @@ export const GET_AUTH_USER = gql`
     }
   }
 `
+
+export const USER_COURSES = gql`
+  query UserCourses {
+    courses: userCourses {
+      id
+      name
+      startDate
+      endDate
+      description
+      section {
+        id
+        startDate
+      }
+      progress
+    }
+  }
+`

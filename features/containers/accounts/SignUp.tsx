@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRegister } from '@gql/hooks/auth'
 import { emailValidator } from '@features/utils/validators/components'
 import { MutationRegisterArgs } from '@gql/types/graphql'
-import { ErrorMessage } from '@components/bank/errors'
+import ErrorMessage from '@components/bank/errors'
 import { setAuthToken } from '@features/utils/cookies'
 import { useRouter } from 'next/router'
 

@@ -9,6 +9,7 @@ import { useAppDispatch } from "@features/store/hooks"
 import { setUser } from "@features/store/slices/userSlice"
 import { prepUserData } from "@features/store/helpers/users"
 import { setAuthToken } from "@features/utils/cookies"
+import Label from "@components/bank/label"
 
 const initialInput:MutationTokenAuthArgs = {
   email: '',
@@ -64,7 +65,9 @@ const SignInPage = ()=>{
           className='flex flex-col items-center justify-center gap-4 border-2 p-5 rounded-[3rem]'>
           <div className='flex flex-col gap-3 w-full'>
             <div className='mb-3 flex gap-3 w-full'>
-              <label className={`bg-${emailColor} rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Email</label>
+              <Label htmlFor="email" className={`bg-${emailColor}`}>
+                Email
+              </Label>
               <input
                 ref={emailRef}
                 required
@@ -76,7 +79,7 @@ const SignInPage = ()=>{
           <div className='flex flex-col w-full gap-5'>
             <div className='flex flex-col gap-3 w-full'>
               <div className='border-2 w-full flex rounded-[5rem] '>
-                <label className={`bg-dark-bg rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Password</label>
+                <Label className="bg-dark-bg">Password</Label>
                 <input
                   ref={pass1Ref}
                   required

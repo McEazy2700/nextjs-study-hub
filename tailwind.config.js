@@ -16,7 +16,7 @@ module.exports = {
         fade: "#696984",
         dark: {
           accent: "#0D1821",
-          bg: "#344966"
+          bg: "#1f3a5e"
         }
       },
       fontFamily: {

@@ -2,6 +2,9 @@ import { useRouter } from "next/router";
 import { useAuthUser, useRefeshToken } from "@gql/hooks/auth"
 import { getRefreshToken, setAuthToken } from "@features/utils/cookies"
 import React, { useEffect } from "react";
+import { useAppDispatch } from "@features/store/hooks";
+import { setUser } from "@features/store/slices/userSlice";
+import { prepUserData } from "@features/store/helpers/users";
 
 interface Component {
   children?: React.ReactNode | React.ReactElement
@@ -10,7 +13,7 @@ interface Component {
 const Authorize = ({ children }: Component) => {
   const refresh = getRefreshToken()
   const router = useRouter()
-  const path = router.asPath
+  const dispatch = useAppDispatch()
   useEffect(()=>{
     if (!refresh){
       router.replace('/signin')
@@ -52,6 +55,7 @@ const Authorize = ({ children }: Component) => {
             router.replace('/signin')
             return <></>
           }
+          dispatch(setUser(prepUserData(resp.data.user)))
         })
       })
   }
