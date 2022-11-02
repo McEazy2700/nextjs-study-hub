@@ -6,7 +6,9 @@ type errorMessage = {
 type ErrorType = {
   errors: errorMessage[]
 }
-export function ErrorMessage({ errors }: ErrorType){
+
+const ErrorMessage = ({ errors }: ErrorType) => {
+
 return (
   <ul className='bg-red-600/30 rounded-lg p-5 w-full'>
     {errors.map((error:errorMessage) => {
@@ -20,3 +22,5 @@ return (
   </ul>
 )
 }
+
+export default ErrorMessage

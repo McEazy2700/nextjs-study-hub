@@ -23,7 +23,8 @@
       "@bank/*": ["features/components/bank/*"],
       "@layouts/*": ["features/layouts/*"],
       "@gql/*": ["graphql/*"],
-      "@store/*": ["features/store/*"]
+      "@store/*": ["features/store/*"],
+      "@utils/*": ["features/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

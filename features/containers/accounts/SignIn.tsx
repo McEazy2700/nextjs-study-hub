@@ -3,7 +3,7 @@ import Link from "next/link"
 import { emailValidator } from "@features/utils/validators/components"
 import { MutationTokenAuthArgs } from "@gql/types/graphql"
 import { useSignIn } from "@gql/hooks/auth"
-import { ErrorMessage } from '@components/bank/errors'
+import ErrorMessage from '@components/bank/errors'
 import { useRouter } from "next/router"
 import { useAppDispatch } from "@features/store/hooks"
 import { setUser } from "@features/store/slices/userSlice"

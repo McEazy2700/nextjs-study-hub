@@ -20,9 +20,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <div className="dark:text-white text-sm md:text-base font-poppins dark:bg-dark-bg">
-          {getLayout(<Component {...pageProps} />)}
-        </div>
+      <div className="dark:text-white text-sm md:text-base font-poppins dark:bg-dark-bg">
+        {getLayout(<Component {...pageProps} />)}
+      </div>
       </Provider>
     </ApolloProvider>
   )

@@ -25,6 +25,7 @@ export const SIGN_IN = gql`
   mutation Login($email: String!, $password: String!) {
     signin: tokenAuth(email: $email, password: $password) {
       token
+      refreshToken
       success
       errors
       user {
@@ -36,6 +37,18 @@ export const SIGN_IN = gql`
           imageUrl
         }
       }
+    }
+  }
+`
+
+export const REFRESH_TOKEN = gql`
+  mutation RefreshToken ($refreshToken: String!) {
+    refreshToken (refreshToken: $refreshToken) {
+      token
+      payload
+      success
+      errors
+      refreshToken
     }
   }
 `
