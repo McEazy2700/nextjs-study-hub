@@ -32,7 +32,7 @@ const MyModal = ({ title, open, children, onClose }:ModType)=>{
                   animate={{ z: 0 }}
                   exit={{ z: -10 }}
                   key={Math.random()}
-                  className="fixed inset-0 flex items-center justify-center p-4"
+                  className="fixed inset-0 overflow-y-scroll flex items-center justify-center p-4"
                   // className='flex dark:text-white flex-col items-center justify-center'
                 >
                   <Dialog.Panel className='bg-white dark:bg-dark-bg p-2 rounded-md shadow-lg shadow-dark-accent'>
