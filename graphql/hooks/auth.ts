@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useApolloClient, useMutation, useQuery } from "@apollo/client";
+import { removeAuthToken } from "@features/utils/cookies";
 import { REFRESH_TOKEN, REGISTER, SIGN_IN } from "@gql/requests/Mutations";
 import { GET_AUTH_USER } from "@gql/requests/Queries";
 import {
@@ -48,4 +49,10 @@ export const useRefeshToken = (refresh: string) => {
 
 export const useAuthUser = () => {
   return useQuery <{ user: UserNode }>(GET_AUTH_USER)
+}
+
+export const useLogOut = () => {
+  const client = useApolloClient()
+  removeAuthToken()
+  client.resetStore()
 }

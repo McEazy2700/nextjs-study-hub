@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 
 const getCookie = Cookies.get
 const setCookie = Cookies.set
+const removeCookie = Cookies.remove
 export const getToken = ()=>{
   return getCookie('token')
 }
@@ -13,4 +14,9 @@ export const getRefreshToken = ()=>{
 export const setAuthToken = (token: string, refresh: string)=>{
   setCookie('token', token, { sameSite: "None"})
   setCookie('refresh', refresh, { sameSite: "None"})
+}
+
+export const removeAuthToken = () => {
+  removeCookie('token')
+  removeCookie('refresh')
 }

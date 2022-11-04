@@ -8,14 +8,15 @@ interface ItemType {
   href: string;
   icon?: React.ReactNode | React.ReactElement
   text: string
+  className?: string
 }
-const SideBarItem = ({ context, href, icon, text }:ItemType)=>{
+const SideBarItem = ({ className, context, href, icon, text }:ItemType)=>{
   const barContext = React.useContext(context)
 
   if (href) {
     return (
       <Link 
-        className="flex p-2 mt-4 gap-3 rounded-[2.5rem] hover:bg-accent hover:text-black active:bg-accent active:text-black transition-all items-center justify-start"
+        className={`flex p-2 mt-4 gap-3 rounded-[2.5rem] hover:bg-accent hover:text-black active:bg-accent active:text-black transition-all items-center justify-start ${className}`}
         href={href}>
         {icon && 
           <span className="text-3xl">{icon}</span>

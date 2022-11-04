@@ -3,6 +3,10 @@ import { AnimatePresence, motion } from "framer-motion"
 import React, { useState } from "react"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa'
 import SideBarProfile from "@components/bank/sidebar/profile"
+import Link from "next/link"
+import { FaSignOutAlt } from "react-icons/fa"
+import SideBarItem from "./items"
+
 
 interface BarType {
   context: React.Context<SideBarContextType>
@@ -38,7 +42,10 @@ const SideBar = ({ children, context }: BarType)=>{
           </button>
           {children}
       </div>
-      <SideBarProfile context={context}/>
+      <div className="absolute bottom-1 flex flex-col">
+        <SideBarProfile context={context}/>
+        <SideBarItem className="ml-2" href="/signout" text="Sign Out" icon={<FaSignOutAlt />} context={context}/>
+      </div>
     </motion.div>
   )
 }

@@ -17,7 +17,7 @@ const SideBarProfile = ({ context }: Profile)=>{
   return (
     <Link 
       href='/user/profile'
-      className={`absolute w-full bottom-1 items-center transition-all ${!barContext.isOpen ? 'justify-center' : 'justify-start px-4'} flex gap-3 px-2`}>
+      className={`w-full ml-1 items-center transition-all ${!barContext.isOpen ? 'justify-center' : 'justify-start px-4'} flex gap-3 px-2`}>
       <div className='w-10 overflow-hidden aspect-square rounded-full'>
         <img className='w-full object-cover' src={imageUrl} alt={user.user.username} loading='lazy'/>
       </div>
