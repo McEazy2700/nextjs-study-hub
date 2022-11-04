@@ -1,6 +1,6 @@
+import React from "react"
 import CoursesPage from "@containers/courses"
 import WithSidebar from "@features/layouts/with-sidebar"
-import React from "react"
 
 export async function getServerSideProps(){
   return {

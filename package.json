@@ -8,10 +8,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.10.12",
+    "@headlessui/react": "^1.7.4",
+    "@mui/styled-engine-sc": "^5.10.6",
+    "@reach/dialog": "^0.18.0",
     "@reduxjs/toolkit": "^1.8.6",
+    "@stitches/react": "^1.2.8",
     "@types/js-cookie": "^3.0.2",
     "framer-motion": "^7.6.4",
     "graphql": "^16.6.0",
@@ -21,6 +22,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
     "react-redux": "^8.0.4",
+    "styled-components": "^5.3.6",
     "typescript-cookie": "^1.0.4"
   },
   "devDependencies": {

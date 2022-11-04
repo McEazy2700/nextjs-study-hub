@@ -24,7 +24,8 @@
       "@layouts/*": ["features/layouts/*"],
       "@gql/*": ["graphql/*"],
       "@store/*": ["features/store/*"],
-      "@utils/*": ["features/utils/*"]
+      "@utils/*": ["features/utils/*"],
+      "@hocs/*": ["features/hocs/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

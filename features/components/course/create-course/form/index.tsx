@@ -1,7 +1,7 @@
 const CreateCourse = ()=>{
 
   return (
-    <form className="flex flex-col max-w-xl gap-2">
+    <form className="flex dark:text-white flex-col max-w-2xl w-[95vw] rounded bg-white dark:bg-dark-bg p-5 gap-2">
       <div className="flex-col flex gap-3">
         <div className="flex flex-col">
           <label className="" htmlFor="name">Course name</label>
