@@ -20,14 +20,14 @@ const SignInPage = ()=>{
   const pass1Ref = useRef() as React.MutableRefObject<HTMLInputElement>
   const router = useRouter()
   const [signInUser, { loading, data, error }] = useSignIn(initialInput)
-  const [emailColor, setEmailColor] = useState('dark-bg')
+  const [emailColor, setEmailColor] = useState('bg-dark-bg')
   const dispatch = useAppDispatch()
   const validateEmail = ()=>{
     const validEmail = emailValidator(emailRef)
     if (validEmail) {
-      setEmailColor('green-700')
+      setEmailColor('bg-system-success')
     }else {
-      setEmailColor('red-600')
+      setEmailColor('bg-system-error')
     }
   }
   const signInHandler: React.FormEventHandler = (event)=>{
@@ -65,7 +65,7 @@ const SignInPage = ()=>{
           className='flex flex-col items-center justify-center gap-4 border-2 p-5 rounded-[3rem]'>
           <div className='flex flex-col gap-3 w-full'>
             <div className='mb-3 flex gap-3 w-full'>
-              <Label htmlFor="email" className={`bg-${emailColor}`}>
+              <Label htmlFor="email" className={`${emailColor}`}>
                 Email
               </Label>
               <input

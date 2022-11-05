@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import { useMutation } from "@apollo/client"
-import { CREATE_COURSE } from "@gql/requests/Mutations"
+import { CREATE_UPDATE_COURSE } from "@gql/requests/Mutations"
 import { CourseCreateUpdateMutation, MutationCreateUpdateCourseArgs } from "@gql/types/graphql"
-import { appendCourse, CourseListType } from "@features/store/slices/courseSlice"
+import { appendCourse } from "@features/store/slices/courseSlice"
 import { useAppDispatch } from "@features/store/hooks"
 import { createCourseObj } from "@components/course/course-list/utils"
 
@@ -23,7 +23,7 @@ export const useCreateCourse = ()=>{
   const [create, { loading, data, error }] = useMutation<
     { course: CourseCreateUpdateMutation },
     MutationCreateUpdateCourseArgs
-    >(CREATE_COURSE, {
+    >(CREATE_UPDATE_COURSE, {
       variables: {
         ...courseArgs
       }

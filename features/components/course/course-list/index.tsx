@@ -18,8 +18,17 @@ const CourseList = ({onClick}: CourseListProps)=>{
         onClick={onClick}>Add +</button>
       </div>
       <ul className="flex flex-wrap gap-2 max-h-[20rem] overflow-y-scroll">
-        {
+        {courses.courses.length > 0 ?
         courses.courses.map(course => <CourseCard key={course.course.id} course={course.course} /> )
+        : <div className="w-full p-2 flex flex-col items-center justify-center gap-2">
+            <div className="max-w-[10rem]">
+              <img className="w-full" src="/assets/images/whistling.png" alt="whistling" />
+            </div>
+            <div className="text-black/30 dark:text-secondary/30 font-semibold flex flex-col items-center justify-center">
+              <p className="">There's nothing to see here. </p>
+              <button onClick={onClick}>Add now!</button>
+            </div>
+          </div>
       }
       </ul>
     </div>

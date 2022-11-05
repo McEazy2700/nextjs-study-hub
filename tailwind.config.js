@@ -14,6 +14,10 @@ module.exports = {
         tatiary: "#344966",
         accent: "#B4CDED",
         fade: "#696984",
+        system: {
+          success: "#03e13c",
+          error: "#e52515"
+        },
         dark: {
           accent: "#0D1821",
           bg: "#1f3a5e"

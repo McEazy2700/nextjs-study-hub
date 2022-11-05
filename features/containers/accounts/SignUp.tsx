@@ -21,23 +21,25 @@ const SignUp: PageWithLayout = () => {
   const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>
   const usernameRef = useRef() as React.MutableRefObject<HTMLInputElement>
   const router = useRouter()
-  const [emailColor, setEmailColor] = useState('dark-bg')
+  const [emailColor, setEmailColor] = useState('bg-dark-bg')
   const [passColor, setPassColor] = useState('dark-bg')
   const passwordChangeHandler = ()=>{
     if (pass1Ref.current.value === pass2Ref.current.value){
-      setPassColor('green-700')
+      setPassColor('system-success')
     }else {
-      setPassColor('red-600')
+      setPassColor('system-error')
     }
   }
   const validateEmail = ()=>{
     const validEmail = emailValidator(emailRef)
     if (validEmail) {
-      setEmailColor('green-700')
+      setEmailColor('bg-system-success')
     }else {
-      setEmailColor('red-600')
+      setEmailColor('bg-system-error')
     }
+    console.log(emailColor)
   }
+  
   const signUpHandler: React.FormEventHandler = (event)=>{
     event.preventDefault()
     registerUser({
@@ -80,7 +82,7 @@ const SignUp: PageWithLayout = () => {
           </div>
           <div className='flex flex-col gap-3 w-full'>
             <div className='mb-3 flex gap-3 w-full'>
-              <label className={`bg-${emailColor} rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Email</label>
+              <label className={`${emailColor} rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Email</label>
               <input
                 ref={emailRef}
                 required

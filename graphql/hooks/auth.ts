@@ -11,6 +11,7 @@ import {
   MutationRefreshTokenArgs,
   UserNode
 } from "@gql/types/graphql";
+import { error } from "console";
 
 export const useRegister = (userData: MutationRegisterArgs) => {
   return useMutation<
@@ -53,6 +54,8 @@ export const useAuthUser = () => {
 
 export const useLogOut = () => {
   const client = useApolloClient()
+  client.resetStore().catch(err => {
+    console.log(err)
+  })
   removeAuthToken()
-  client.resetStore()
 }

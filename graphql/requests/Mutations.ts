@@ -53,7 +53,7 @@ export const REFRESH_TOKEN = gql`
   }
 `
 
-export const CREATE_COURSE = gql`
+export const CREATE_UPDATE_COURSE = gql`
   mutation CreateUpdateCourse(
     $name: String
     $description: String
@@ -80,6 +80,33 @@ export const CREATE_COURSE = gql`
         section {
           id
         }
+      }
+      success
+    }
+  }
+`
+
+export const CREATE_UPDATE_SECTION = gql`
+  mutation CreateUpdateSection(
+    $name: String
+    $description: String
+    $sectionId: ID
+    $startDate: Date
+    $endDate: Date
+  ) {
+    createUpdateSection(
+      name: $name
+      description: $description
+      sectionId: $sectionId
+      startDate: $startDate
+      endDate: $endDate
+    ) {
+      section {
+        id
+        name
+        description
+        startDate
+        endDate
       }
       success
     }
