@@ -44,3 +44,48 @@ export const USER_SECTIONS = gql`
     }
   }
 `
+
+export const USER_RESOURCES = gql`
+  query UserResources {
+    resources: userResources {
+      id
+      creator {
+        id
+      }
+      course {
+        id
+      }
+      description
+      link
+      document
+      audio
+      image
+      video
+    }
+  }
+`
+
+export const GET_COURSE_BY_ID = gql`
+  query GetCourseByID ($id: ID!){
+    course: getCourseById(id: $id) {
+      id
+      name
+      startDate
+      endDate
+      description
+      section {
+        id
+      }
+      progress
+      resources {
+        id
+        description
+        link
+        document
+        audio
+        image
+        video
+      }
+    }
+  }
+`

@@ -3,7 +3,7 @@ import Chat from "@components/landing-page/blocks/floating-chat"
 const Hero = ()=>{
 
   return (
-    <section className="relative min-w-[100vw] text-black bg-accent p-14 grid md:grid-cols-2">
+    <section className="relative min-w-[100vw] overflow-x-hidden text-black bg-accent p-14 grid md:grid-cols-2">
       <div id="hero-text" className="h-full gap-3 flex flex-col items-start justify-center">
         <h1 className="text-3xl text-tatiary font-bold text-start">
           <span className="text-primary">Sharing </span>Knowledge has never been easier.

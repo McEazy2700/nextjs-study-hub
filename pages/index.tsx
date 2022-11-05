@@ -11,7 +11,7 @@ const Home: NextPage = (_props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center text-center">
+      <main className="flex w-full overflow-x-hidden flex-1 flex-col items-center justify-center text-center">
         <LandingPage />
       </main>
     </div>

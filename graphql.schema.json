@@ -127,6 +127,22 @@
             "deprecationReason": null
           },
           {
+            "name": "resources",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ResourceType",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "section",
             "description": "",
             "args": [],
@@ -1846,6 +1862,35 @@
         "name": "Query",
         "description": null,
         "fields": [
+          {
+            "name": "getCourseById",
+            "description": "Returns a course object with the specified `id`.",
+            "args": [
+              {
+                "name": "id",
+                "description": "The `id` of the target course",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CourseType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "getPublicTodos",
             "description": "Returns all public Todo lists",

@@ -112,3 +112,45 @@ export const CREATE_UPDATE_SECTION = gql`
     }
   }
 `
+
+export const CREATE_RESOURCE = gql`
+  mutation CreateResource(
+    $audio: Upload
+    $video: Upload
+    $document: Upload
+    $image: Upload
+    $description: String
+    $courseId: ID!
+    $resourceId: ID
+    $link: String
+    $public: Boolean
+  ) {
+    resource: createUpdateResource(
+      audio: $audio
+      courseId: $courseId
+      description: $description
+      image: $image
+      link: $link
+      document: $document
+      public: $public
+      resourceId: $resourceId
+      video: $video
+    ) {
+      resource {
+        id
+        creator {
+          id
+        }
+        course {
+          id
+        }
+        description
+        link
+        document
+        audio
+        image
+        video
+      }
+    }
+  }
+`

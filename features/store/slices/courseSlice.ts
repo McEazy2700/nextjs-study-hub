@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@features/store/hooks"
+import { useAppDispatch, useAppSelector } from "@features/store/hooks"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/config";
 import { Maybe, CourseType } from '@gql/types/graphql'
@@ -42,6 +42,10 @@ const coursesSlice = createSlice({
 export const { setCourses, appendCourse } = coursesSlice.actions
 export default coursesSlice.reducer
 export const selectCourses = (state:RootState) => state.courses
+export const getCourse = (id: number) => {
+  const courses = useAppSelector(selectCourses)
+  return courses.courses.find(course => course.course.id === id.toString())
+}
 
 type Dispatch = ReturnType<typeof useAppDispatch>
 

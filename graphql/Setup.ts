@@ -1,8 +1,9 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { createUploadLink } from 'apollo-upload-client'
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context'
 import { getToken } from "@features/utils/cookies";
 
-const httpLink = createHttpLink({
+const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_API,
 })
 
@@ -18,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
 
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: authLink.concat(uploadLink),
   cache: new InMemoryCache()
 })
 
