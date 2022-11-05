@@ -94,7 +94,7 @@ export const CREATE_UPDATE_SECTION = gql`
     $startDate: Date
     $endDate: Date
   ) {
-    createUpdateSection(
+    section: createUpdateSection(
       name: $name
       description: $description
       sectionId: $sectionId

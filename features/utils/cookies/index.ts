@@ -12,8 +12,8 @@ export const getRefreshToken = ()=>{
 }
 
 export const setAuthToken = (token: string, refresh: string)=>{
-  setCookie('token', token, { sameSite: "None"})
-  setCookie('refresh', refresh, { sameSite: "None"})
+  setCookie('token', token, { sameSite: "None", secure: true})
+  setCookie('refresh', refresh, { sameSite: "None", secure: true})
 }
 
 export const removeAuthToken = () => {

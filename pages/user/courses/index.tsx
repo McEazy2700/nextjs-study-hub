@@ -1,14 +1,10 @@
 import React, { useEffect } from "react"
 import CoursesPage from "@containers/courses"
 import WithSidebar from "@features/layouts/with-sidebar"
-import { useUserCourses } from "@gql/hooks/queries"
-import { Maybe, CourseType } from '@gql/types/graphql'
+import { useUserCourses, useUserSections } from "@gql/hooks/queries"
 import { useAppDispatch } from "@features/store/hooks"
-import { dispatchCourseList } from "@components/course/course-list/utils"
-
-interface CourseProps {
-  courses: Maybe<Maybe<CourseType>[]>
-}
+import { dispatchCourseList } from "@store/slices/courseSlice"
+import { dispatchSectionList } from "@store/slices/sectionSlice"
 
 export async function getServerSideProps(){
   return {
@@ -19,15 +15,19 @@ export async function getServerSideProps(){
 }
 
 const Courses = () => {
-  const { loading, data, error } = useUserCourses()
+  const { loading: coursesLoading, data: courseData, error: coursesError } = useUserCourses()
+  const { loading: sectionLoading, data: sectionData, error: sectionError } = useUserSections()
   const dispatch = useAppDispatch()
   useEffect(()=>{
-  },[data])
-  if (!loading && !error){
-    dispatchCourseList(dispatch, data?.courses ?? [])
+  },[courseData])
+  if (!coursesLoading && !coursesError){
+    dispatchCourseList(dispatch, courseData?.courses ?? [])
+  }
+  if (!sectionLoading && !sectionError){
+    dispatchSectionList(dispatch, sectionData?.sections)
   }
 
-  if (loading){
+  if (coursesLoading || sectionLoading){
     return <div>Loading...</div>
   }
 

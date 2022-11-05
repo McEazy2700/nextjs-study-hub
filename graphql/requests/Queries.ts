@@ -31,3 +31,16 @@ export const USER_COURSES = gql`
     }
   }
 `
+
+export const USER_SECTIONS = gql`
+  query UserSections {
+    sections: userSections {
+      id
+      startDate
+      endDate
+      dateAdded
+      name
+      description
+    }
+  }
+`

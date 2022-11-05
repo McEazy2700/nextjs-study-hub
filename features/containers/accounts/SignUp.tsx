@@ -69,7 +69,7 @@ const SignUp: PageWithLayout = () => {
           className='flex flex-col items-center justify-center gap-4 border-2 p-5 rounded-[3rem]'>
           <div className='flex flex-col gap-3 w-full'>
             <div className='mb-3 flex gap-3 w-full'>
-              <label className='bg-dark-bg rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center '>Username</label>
+              <label className='bg-dark-bg text-secondary/80 rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center '>Username</label>
               <input
                 ref={usernameRef}
                 required
@@ -82,7 +82,7 @@ const SignUp: PageWithLayout = () => {
           </div>
           <div className='flex flex-col gap-3 w-full'>
             <div className='mb-3 flex gap-3 w-full'>
-              <label className={`${emailColor} rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Email</label>
+              <label className={`${emailColor} text-secondary/80 rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Email</label>
               <input
                 ref={emailRef}
                 required
@@ -97,7 +97,7 @@ const SignUp: PageWithLayout = () => {
           <div className='flex flex-col w-full gap-5'>
             <div className='flex flex-col gap-3 w-full'>
               <div className='border-2 w-full flex rounded-[5rem] '>
-                <label className={`bg-${passColor} rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Password</label>
+                <label className={`bg-${passColor} text-secondary/80 rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Password</label>
                 <input
                   ref={pass1Ref}
                   required
@@ -109,7 +109,7 @@ const SignUp: PageWithLayout = () => {
               }
             </div>
             <div className='border-2 w-full flex rounded-[5rem] '>
-              <label className={`bg-${passColor} rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Confirm</label>
+              <label className={`bg-${passColor} text-secondary/80 rounded-[5rem] p-3 px-5 md:px-10 flex items-center justify-center `}>Confirm</label>
               <input
                 ref={pass2Ref}
                 required
