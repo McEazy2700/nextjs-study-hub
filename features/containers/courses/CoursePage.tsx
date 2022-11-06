@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import CreateCourse from "@components/course/create-course/form"
-import Modal from '@hocs/modal'
+import CreateCourse from "@components/course/create-course/form/CreateCourse"
+import Modal from '@hocs/modal/Modal'
 import CourseList from '@components/course/course-list'
 import CreateSection from '@components/section/create-section-form'
 import SectionList from '@components/section/section-list'

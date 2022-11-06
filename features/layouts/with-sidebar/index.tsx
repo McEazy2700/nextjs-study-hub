@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
-import SideBar from "@components/bank/sidebar"
+import SideBar from "@components/bank/sidebar/SideBar"
 import SideBarItem from "@components/bank/sidebar/items"
 import { MdSpaceDashboard } from 'react-icons/md'
 import { HiAcademicCap } from 'react-icons/hi'

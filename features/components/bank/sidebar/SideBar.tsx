@@ -1,9 +1,8 @@
 import { SideBarContextType } from "@features/layouts/with-sidebar"
-import { AnimatePresence, motion } from "framer-motion"
-import React, { useState } from "react"
+import { motion } from "framer-motion"
+import React from "react"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa'
 import SideBarProfile from "@components/bank/sidebar/profile"
-import Link from "next/link"
 import { FaSignOutAlt } from "react-icons/fa"
 import SideBarItem from "./items"
 

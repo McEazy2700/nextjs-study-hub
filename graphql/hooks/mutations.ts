@@ -12,6 +12,7 @@ import { useAppDispatch } from "@features/store/hooks"
 import { createCourseObj } from "@store/slices/courseSlice"
 import { useRouter } from "next/router"
 import { appendSection, createSectionObj } from "@features/store/slices/sectionSlice"
+import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
 
 interface defRefObj {
   nameRef: React.MutableRefObject<HTMLInputElement>
@@ -27,7 +28,7 @@ const defArgs = {
   endDate: null
 }
 
-export const useCreateCourse = ()=>{
+export const useCreateUpdateCourse = ()=>{
   const router = useRouter()
   const dispatch = useAppDispatch()
   const [create, { loading, data, error }] = useMutation<
@@ -41,17 +42,25 @@ export const useCreateCourse = ()=>{
 
   if (error){
     console.log(error.message)
-    router.replace('/signout')
+    // router.replace('/signout')
   }
   
-  const createCourse = async (refs: defRefObj, sectoinId?: string, courseId?: string) => {
+  const createCourse = async (refs: defRefObj, sectoinId?: string) => {
+    const nameVal = refs.nameRef.current.value 
+    const name = nameVal && nameVal !== '' ? nameVal : null
+    const descVal = refs.descRef.current.value 
+    const description = descVal && descVal !== '' ? descVal : null
+    const startVal = refs.startRef.current.value 
+    const startDate = startVal && startVal !== '' ? startVal : null
+    const endVal = refs.endRef.current.value 
+    const endDate = endVal && endVal !== '' ? endVal : null
+
     create({
       variables: {
-        name: refs.nameRef.current.value ?? null,
-        description: refs.descRef.current.value ?? null,
-        startDate: refs.startRef.current.value ?? null,
-        endDate: refs.endRef.current.value ?? null,
-        courseId: courseId,
+        name,
+        description,
+        startDate,
+        endDate,
         sectionId: sectoinId
       }
     }).then(resp => {
@@ -64,7 +73,33 @@ export const useCreateCourse = ()=>{
         console.log(err)
       })
   }
-  return {createCourse, loading, data, error }
+   const updateCourse = async (refs: defRefObj, sectoinId?: string, courseId?: string) => {
+    const nameVal = refs.nameRef.current.value 
+    const name = nameVal && nameVal !== '' ? nameVal : null
+    const descVal = refs.descRef.current.value 
+    const description = descVal && descVal !== '' ? descVal : null
+    const startVal = refs.startRef.current.value 
+    const startDate = startVal && startVal !== '' ? startVal : null
+    const endVal = refs.endRef.current.value 
+    const endDate = endVal && endVal !== '' ? endVal : null
+
+    create({
+      variables: {
+        name,
+        description,
+        startDate,
+        endDate,
+        courseId: courseId,
+        sectionId: sectoinId
+        }
+      }).then(resp => {
+        dispatchCourseDetail(dispatch, resp.data?.course.course)
+      })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  return {createCourse, updateCourse, loading, data, error }
 }
 
 export const useCreateSection = ()=>{

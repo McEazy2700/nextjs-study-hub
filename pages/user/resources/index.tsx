@@ -1,4 +1,4 @@
-import WithSidebar from "@features/layouts/with-sidebar"
+import { getSideBarLayout } from "@features/layouts/hooks"
 import { useAppDispatch } from "@features/store/hooks"
 import { dispatchResourceList } from "@features/store/slices/resourceSlice"
 import { useUserResources } from "@gql/hooks/queries"
@@ -20,10 +20,6 @@ const Resource = ()=>{
   )
 }
 
-Resource.getLayout = (page: React.ReactElement) =>{
-  return (
-    <WithSidebar>{page}</WithSidebar>
-  )
-}
+Resource.getLayout = getSideBarLayout
 
 export default Resource

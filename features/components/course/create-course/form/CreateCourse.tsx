@@ -1,7 +1,7 @@
 import SubmitButton from "@components/bank/form/button"
 import Form from "@components/bank/form/form"
 import Input, { TextArea } from "@components/bank/form/input"
-import { useCreateCourse } from "@gql/hooks/mutations"
+import { useCreateUpdateCourse } from "@gql/hooks/mutations"
 import React from "react"
 import { useCreateCourseRefs } from "./utils"
 
@@ -11,7 +11,7 @@ interface FormProps {
 
 const CreateCourse = ({close}:FormProps)=>{
   const courseRefs = useCreateCourseRefs()
-  const { createCourse, loading } = useCreateCourse()
+  const { createCourse, loading } = useCreateUpdateCourse()
 
   const createCourseHandler: React.FormEventHandler = (event) => {
     event.preventDefault()

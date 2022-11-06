@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
-import CoursesPage from "@containers/courses"
-import WithSidebar from "@features/layouts/with-sidebar"
+import CoursesPage from "@containers/courses/CoursePage"
 import { useUserCourses, useUserSections } from "@gql/hooks/queries"
 import { useAppDispatch } from "@features/store/hooks"
 import { dispatchCourseList } from "@store/slices/courseSlice"
 import { dispatchSectionList } from "@store/slices/sectionSlice"
+import { getSideBarLayout } from "@features/layouts/hooks"
 
 export async function getServerSideProps(){
   return {
@@ -36,10 +36,6 @@ const Courses = () => {
   )
 }
 
-Courses.getLayout = (page: React.ReactElement) => {
-  return (
-    <WithSidebar>{page}</WithSidebar>
-  )
-}
+Courses.getLayout = getSideBarLayout
 
 export default Courses

@@ -58,8 +58,9 @@ const Authorize = ({ children }: Component) => {
           dispatch(setUser(prepUserData(resp.data.user)))
         })
       })
+  }else{
+    dispatch(setUser(prepUserData(data.user)))
   }
-  // router.replace('/user/dashboard')
   return (
     <>
       {children}

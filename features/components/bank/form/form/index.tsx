@@ -16,3 +16,14 @@ const Form = ({ onSubmit, children }: FormProps)=>{
 }
 
 export default Form
+
+export const FormFull = ({ onSubmit, children }: FormProps)=>{
+
+  return (    
+    <form 
+      onSubmit={onSubmit}
+      className="flex dark:text-white md:flex-col w-full rounded-lg bg-white dark:bg-secondary/5 p-2 gap-2">
+      {children}
+    </form>
+)
+}

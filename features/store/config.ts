@@ -3,13 +3,15 @@ import userReducer from '@store/slices/userSlice'
 import coursesReducer from '@store/slices/courseSlice'
 import sectionReducer from '@store/slices/sectionSlice'
 import resourceReducer from '@store/slices/resourceSlice'
+import courseDetailReducer from '@store/slices/courseDetailSlice'
 
 export const store = configureStore({
   reducer: {
     users: userReducer,
     courses: coursesReducer,
     sections: sectionReducer,
-    resources: resourceReducer
+    resources: resourceReducer,
+    courseDetail: courseDetailReducer
   }
 })
 

@@ -9,7 +9,7 @@ interface ModType {
   title?: string
 }
 
-const MyModal = ({ title, open, children, onClose }:ModType)=>{
+const Modal = ({ title, open, children, onClose }:ModType)=>{
   return (
     <AnimatePresence>
       {open &&
@@ -49,4 +49,4 @@ const MyModal = ({ title, open, children, onClose }:ModType)=>{
   )
 }
 
-export default MyModal
+export default Modal

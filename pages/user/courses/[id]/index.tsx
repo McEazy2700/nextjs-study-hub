@@ -1,4 +1,7 @@
-import WithSidebar from "@features/layouts/with-sidebar"
+import CourseUpdateForm from "@components/course/course-update-form/UpdateForm"
+import { getSideBarLayout } from "@features/layouts/hooks"
+import { useAppDispatch } from "@features/store/hooks"
+import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
 import { createCourseObj } from "@features/store/slices/courseSlice"
 import { createResourceList } from "@features/store/slices/resourceSlice"
 import { useGetCourseByID } from "@gql/hooks/queries"
@@ -7,6 +10,7 @@ import React, { useEffect, useState } from "react"
 
 const CourseDetails = ()=>{
   const [resources, setResources] = useState<ReturnType<typeof createResourceList>>()
+  const dispatch = useAppDispatch()
   const [course, setCourse] = useState<ReturnType<typeof createCourseObj>>({
     name: '',
     description: '',
@@ -21,26 +25,22 @@ const CourseDetails = ()=>{
 
   useEffect(()=>{
     if (!loading && !error) {
-      setCourse(createCourseObj(data?.course))
+      dispatchCourseDetail(dispatch, data?.course)
       const resources = data?.course?.resources
       setResources(createResourceList(resources))
     }
   },[data])
-  console.log(course)
-  console.log(resources)
   if (loading){
     return <div>Loading....</div>
   }
   return (
-    <div>Course { course.id }</div>
+    <div className="p-2">
+      <CourseUpdateForm />
+    </div>
   )
 }
 
-CourseDetails.getLayout = (page: React.ReactElement) => {
-  return (
-    <WithSidebar>{page}</WithSidebar>
-  )
-}
+CourseDetails.getLayout = getSideBarLayout
 
 export default CourseDetails
 
