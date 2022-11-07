@@ -19,7 +19,7 @@ const Courses = () => {
   const { loading: sectionLoading, data: sectionData, error: sectionError } = useUserSections()
   const dispatch = useAppDispatch()
   useEffect(()=>{
-  },[courseData])
+  },[courseData, sectionData])
   if (!coursesLoading && !coursesError){
     dispatchCourseList(dispatch, courseData?.courses ?? [])
   }

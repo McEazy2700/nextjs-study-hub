@@ -1,11 +1,13 @@
 import React from "react"
 import { useMutation } from "@apollo/client"
-import { CREATE_UPDATE_COURSE, CREATE_UPDATE_SECTION } from "@gql/requests/Mutations"
+import { CREATE_RESOURCE, CREATE_UPDATE_COURSE, CREATE_UPDATE_SECTION } from "@gql/requests/Mutations"
 import { 
   CourseCreateUpdateMutation,
   MutationCreateUpdateCourseArgs,
   MutationCreateUpdateSectionArgs,
-  SectionCreateUpdateMutation
+  SectionCreateUpdateMutation,
+  CreateUpdateResourceMuations,
+  MutationCreateUpdateResourceArgs,
 } from "@gql/types/graphql"
 import { appendCourse } from "@features/store/slices/courseSlice"
 import { useAppDispatch } from "@features/store/hooks"
@@ -13,6 +15,7 @@ import { createCourseObj } from "@store/slices/courseSlice"
 import { useRouter } from "next/router"
 import { appendSection, createSectionObj } from "@features/store/slices/sectionSlice"
 import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
+import { appendResource, createResourceObj } from "@features/store/slices/resourceSlice"
 
 interface defRefObj {
   nameRef: React.MutableRefObject<HTMLInputElement>
@@ -29,7 +32,6 @@ const defArgs = {
 }
 
 export const useCreateUpdateCourse = ()=>{
-  const router = useRouter()
   const dispatch = useAppDispatch()
   const [create, { loading, data, error }] = useMutation<
     { course: CourseCreateUpdateMutation },
@@ -120,12 +122,20 @@ export const useCreateSection = ()=>{
   }
   
   const createSection = (refs: defRefObj, sectionId?: string)=>{
+    const nameVal = refs.nameRef.current.value 
+    const name = nameVal && nameVal !== '' ? nameVal : null
+    const descVal = refs.descRef.current.value 
+    const description = descVal && descVal !== '' ? descVal : null
+    const startVal = refs.startRef.current.value 
+    const startDate = startVal && startVal !== '' ? startVal : null
+    const endVal = refs.endRef.current.value 
+    const endDate = endVal && endVal !== '' ? endVal : null
     create({
       variables: {
-        name: refs.nameRef.current.value,
-        description: refs.descRef.current.value,
-        startDate: refs.startRef.current.value,
-        endDate: refs.endRef.current.value,
+        name,
+        description,
+        startDate,
+        endDate,
         sectionId: sectionId
       }
     }).then(res => {
@@ -139,4 +149,84 @@ export const useCreateSection = ()=>{
       })
   }
   return { createSection, loading, data, error }
+}
+
+interface defResourceRefObj {
+  descRef:  React.MutableRefObject<HTMLTextAreaElement>
+  documentRef: React.MutableRefObject<HTMLInputElement>
+  imageRef: React.MutableRefObject<HTMLInputElement>
+  audioRef: React.MutableRefObject<HTMLInputElement>
+  videoRef: React.MutableRefObject<HTMLInputElement>
+  linkRef: React.MutableRefObject<HTMLInputElement>
+}
+
+const resourceDefArgs = {
+  description: '',
+  document: null,
+  image: null,
+  audio: null,
+  video: null,
+  link: null,
+  public: null
+}
+
+/**
+* Performs create and update mutation for resource
+* @param {string} courseId - The `id` of the course this resource belogns to.
+*/
+export const useCreateUpdateResource = (courseId: string) =>{
+  const dispatch = useAppDispatch()
+  const [create, { loading, data, error }] = useMutation<
+    { resource: CreateUpdateResourceMuations },
+    MutationCreateUpdateResourceArgs>(CREATE_RESOURCE, {
+      variables: {
+        courseId,
+        ...resourceDefArgs
+      }
+    })
+  if (error){
+    console.log(error.message)
+    // router.replace('/signout')
+  }
+  
+  /**
+   * Performs create mutation for course.
+   * @param {string} courseId - The `id` for the course this resource belogns to.
+   * @param {defResourceRefObj} refs - React refs bellonging to the input elements for this resource
+   * @param {boolean} pub - is this resource public or not
+   */
+  const createResource = (courseId: string, refs: defResourceRefObj, pub:boolean) => {
+    const descVal = refs.descRef.current.value 
+    const description = descVal && descVal !== '' ? descVal : null
+    const audioVal = refs.audioRef.current.files 
+    const audio = audioVal && audioVal.length > 0 ? audioVal[0] : null
+    const imageVal = refs.imageRef.current.files 
+    const image = imageVal && imageVal.length > 0 ? imageVal[0] : null
+    const documentVal = refs.documentRef.current.files 
+    const doc = documentVal && documentVal.length > 0 ? documentVal[0] : null
+    const videoVal = refs.videoRef.current.files 
+    const video = videoVal && videoVal.length > 0 ? videoVal[0] : null
+    const linkVal = refs.linkRef.current.value 
+    const link = linkVal && linkVal !== '' ? linkVal : null
+
+    create({
+      variables: {
+        courseId,
+        audio,
+        description,
+        document: doc,
+        image,
+        link,
+        public: pub,
+        video
+      }
+    }).then(resp => {
+        if (resp.data?.resource){
+          const resource = resp.data.resource.resource
+          dispatch(appendResource(createResourceObj(resource)))
+        }
+      })
+    .catch()
+  }
+  return { createResource, loading, data, error }
 }

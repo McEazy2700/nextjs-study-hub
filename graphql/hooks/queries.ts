@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client"
-import { GET_COURSE_BY_ID, USER_COURSES, USER_RESOURCES, USER_SECTIONS } from "@gql/requests/Queries"
-import type { Query, QueryGetCourseByIdArgs, Maybe, ResourceType } from "@gql/types/graphql"
+import { GET_COURSE_BY_ID, GET_RESOURCE_BY_COURSE_ID, USER_COURSES, USER_RESOURCES, USER_SECTIONS } from "@gql/requests/Queries"
+import type { Query, QueryGetCourseByIdArgs, Maybe, ResourceType, QueryGetResourcesByCourseIdArgs } from "@gql/types/graphql"
 
 const QueryVal: Query = {}
 export const useUserCourses = () => {
@@ -21,6 +21,16 @@ export const useGetCourseByID = (id: string)=>{
     QueryGetCourseByIdArgs>(GET_COURSE_BY_ID, {
       variables: {
         id
+      }
+    })
+}
+
+export const useGetResourceByCourseID = (courseId: string) => {
+  return useQuery<
+    { resources: typeof QueryVal.getResourcesByCourseId },
+    QueryGetResourcesByCourseIdArgs>(GET_RESOURCE_BY_COURSE_ID, {
+      variables: {
+        courseId,
       }
     })
 }

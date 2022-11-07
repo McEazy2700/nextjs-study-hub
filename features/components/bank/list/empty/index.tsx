@@ -12,8 +12,8 @@ const messages = [
   },
   {
     src: '/assets/images/chilling.png',
-    text: "ahh.. it's quite peacefull here",
-    cta: "Go on.. Do it!",
+    text: "ahh.. it's quite peacefull here Go on.. ",
+    cta: "Do it!",
     alt: "Dude relaxing"
   },
   {

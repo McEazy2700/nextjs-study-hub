@@ -3,7 +3,7 @@ import Form from "@components/bank/form/form"
 import Input, { TextArea } from "@components/bank/form/input"
 import { useCreateUpdateCourse } from "@gql/hooks/mutations"
 import React from "react"
-import { useCreateCourseRefs } from "./utils"
+import { useCreateCourseRefs } from "@utils/refs/createCourseRef"
 
 interface FormProps {
   close: ()=>void

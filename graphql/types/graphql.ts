@@ -510,6 +510,8 @@ export type Query = {
   getCourseById?: Maybe<CourseType>;
   /** Returns all public Todo lists */
   getPublicTodos?: Maybe<Array<Maybe<TodoType>>>;
+  /** Returns resources for the course with the specified `id` */
+  getResourcesByCourseId?: Maybe<Array<Maybe<ResourceType>>>;
   /** Returns a `TimeTableActivity` with the specified `id` */
   getTimeTableActivityById?: Maybe<TimeTableActivityType>;
   /**
@@ -539,6 +541,11 @@ export type Query = {
 
 export type QueryGetCourseByIdArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryGetResourcesByCourseIdArgs = {
+  courseId?: InputMaybe<Scalars['ID']>;
 };
 
 

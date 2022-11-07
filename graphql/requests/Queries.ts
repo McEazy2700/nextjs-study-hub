@@ -89,3 +89,23 @@ export const GET_COURSE_BY_ID = gql`
     }
   }
 `
+
+export const GET_RESOURCE_BY_COURSE_ID = gql`
+  query GetResourceByCourseID($courseId: ID!){
+    resources: getResourcesByCourseId(courseId: $courseId) {
+      id
+      course {
+        id
+      }
+      description
+      link
+      document
+      audio
+      image
+      video
+      creator {
+        id
+      }
+    }
+  }
+`

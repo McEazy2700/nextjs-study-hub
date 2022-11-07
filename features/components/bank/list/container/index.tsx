@@ -11,10 +11,10 @@ const ListContainer = ({ title, addItem, children }: ListContainerProps)=>{
       <div className="relative flex">
         <h2 className="font-semibold text-lg">{title}</h2>
         <button 
-        className='bg-primary p-2 max-w-[8rem] rounded-3xl absolute right-2 min-w-[6rem] mt-1' 
+        className='bg-primary z-50 p-2 max-w-[8rem] rounded-3xl absolute right-2 min-w-[6rem] mt-1' 
         onClick={addItem}>Add +</button>
       </div>
-      <ul className="flex flex-wrap gap-2 max-h-[20rem] overflow-y-scroll">
+      <ul className="flex flex-wrap relative gap-2 max-h-[20rem] overflow-y-scroll">
         {children}
       </ul>
     </div>

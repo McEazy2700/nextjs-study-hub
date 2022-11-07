@@ -4,7 +4,7 @@ import { Maybe } from "graphql/jsutils/Maybe";
 import { RootState } from "../config";
 import { useAppDispatch } from "../hooks";
 
-type ResourseStateType = {
+export type ResourceStateType = {
   resource: {
     audio?: string | null,
     courseId: string | null,
@@ -19,7 +19,7 @@ type ResourseStateType = {
 }
 
 type ResourseStateList = {
-  resources: ResourseStateType[]
+  resources: ResourceStateType[]
 }
 
 const initialState: ResourseStateList = {
@@ -36,7 +36,7 @@ const resourceSlice = createSlice({
         resources: resources
       }
     },
-    appendResource: (state, action: PayloadAction<ResourseStateType>) => {
+    appendResource: (state, action: PayloadAction<ResourceStateType>) => {
       const { resource } = action.payload
       state.resources.push({resource})
     }
@@ -50,13 +50,13 @@ export const selectResources = (state:RootState) => state.resources
 type Dispatch = ReturnType<typeof useAppDispatch>
 
 export const createResourceObj = (resource: Maybe<ResourceType>)=>{
-  const resourceObj: ResourseStateType = {
+  const resourceObj: ResourceStateType = {
     resource: {
       document: resource?.document,
       audio: resource?.audio,
       id: resource?.id ?? '',
       description: resource?.description,
-      courseId: resource?.course.id ?? '',
+      courseId: resource?.course?.id ?? '',
       creatorId: resource?.creator?.id,
       image: resource?.image,
       link: resource?.link,
@@ -75,6 +75,11 @@ export const createResourceList = (resources: Maybe<Maybe<ResourceType>[]>) => {
   })
   return resourceList
 }
+/**
+ * Prepares and dispatches the return data of a resource query
+ * @param {Dispatch} dispatch - a dispatch function of type useAppDispatch
+ * @param {Maybe<Maybe<ResourceType>} resources - the data returned from a resource query
+ */
 export const dispatchResourceList = (dispatch: Dispatch, resources:Maybe<Maybe<ResourceType>[]>) => {
   const resourceList = createResourceList(resources)
   dispatch(setResources(resourceList))

@@ -1,7 +1,7 @@
 import React from "react"
 
 export interface InputProps {
-  label?: string;
+  label?: string | React.ReactNode;
   type?: React.HTMLInputTypeAttribute;
   inputClasses?: string;
   labelClasses?: string;
@@ -63,5 +63,32 @@ export const TextArea = React.forwardRef(({
       className={`bg-dark-accent/30 w-full shadow focus:shadow focus:shadow-dark-accent transition-all outline-none rounded-lg p-2 ${inputClasses}`}
       id={id} name={name} placeholder={placeholder} />
   </div>
+  )
+})
+
+export const FileInput = React.forwardRef(({ 
+  id, 
+  type,
+  name, 
+  label, 
+  className,
+  placeholder, 
+  inputClasses,
+  defaultValue, 
+  labelClasses }:InputProps, ref: React.LegacyRef<HTMLInputElement>) => {
+  return (
+    <div className={`flex flex-col ${className}`}>
+      {label &&
+        <label className={`p-1 border-2 border-dark-accent/40 bg-dark-accent/40 rounded-md text-dark-accent/60 dark:text-secondary/60 hover:text-secondary/90 transition-all ${labelClasses}`} htmlFor={id}>
+          {label}
+          <input 
+          ref={ref}
+          size={5}
+          about={placeholder}
+          className={`bg-dark-accent/30  w-full shadow focus:shadow focus:shadow-dark-accent transition-all outline-none rounded-lg p-2 ${inputClasses}`}
+          type={type} name={name} id={id} placeholder={placeholder} defaultValue={defaultValue}/>
+        </label>
+      }
+    </div>
   )
 })
