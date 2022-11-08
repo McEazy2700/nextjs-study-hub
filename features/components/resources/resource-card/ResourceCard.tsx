@@ -17,7 +17,7 @@ const ResourceCard = ({ resource }: ResourceItemProps)=>{
   return (
     <Link 
       className="p-1 pb-5 px-4 shadow relative shadow-dark-accent/20 bg-secondary dark:bg-secondary/50 dark:text-secondary min-w-[15rem] flex-1 text-dark-accent rounded-md"
-      href={`resource/${resource.resource.id}`}>
+      href={`/user/resources/${resource.resource.id}`}>
       <div className="pt-1 absolute bottom-0.5 right-3 gap-1 z-20 flex">
         {icons.video && <VideoIcon />}
         {icons.audio && <AudioIcon />}

@@ -12,13 +12,16 @@ interface CreateResourceFormProps {
 }
 const CreateResourceForm = ({ close, courseId }: CreateResourceFormProps)=>{
   const [isPublic, setPublic] = useState(false)
-  const { createResource } = useCreateUpdateResource(courseId)
+  const { createResource, loading } = useCreateUpdateResource(courseId)
   const resourceRefs = createResourceRefs()
 
   const resourceCreateHanlder: React.FormEventHandler = (event) => {
     event.preventDefault()
     createResource(courseId, resourceRefs, isPublic)
     close()
+  }
+  if (loading){
+    return <div>Loading.....</div>
   }
   return (
     <Form onSubmit={resourceCreateHanlder}>

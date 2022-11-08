@@ -9,7 +9,7 @@ interface SectionDropDownProps {
   getCurrSection?: (value: string)=>void
 }
 const SectionDropDown = ({ getCurrSection, currSectionId }: SectionDropDownProps)=>{
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [current, setCurrent] = useState<CurrentValType>({label: '', value: ''})
   const defContextVal = { open, setOpen, current, setCurrent }
   const SectionDropDownContext = React.createContext<DropContextType>(defContextVal)
