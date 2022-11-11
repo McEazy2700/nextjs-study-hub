@@ -1,3 +1,4 @@
+import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 import CourseUpdateForm from "@components/course/course-update-form/UpdateForm"
 import CourseResourcesList from "@components/resources/resources-list/ResourcesList"
 import { getSideBarLayout } from "@features/layouts/hooks"
@@ -5,7 +6,7 @@ import { useAppDispatch } from "@features/store/hooks"
 import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
 import { useGetCourseByID } from "@gql/hooks/queries"
 import { useRouter } from "next/router"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 
 const CourseDetails = ()=>{
   const dispatch = useAppDispatch()
@@ -18,8 +19,9 @@ const CourseDetails = ()=>{
       dispatchCourseDetail(dispatch, data?.course)
     }
   },[data])
+
   if (loading){
-    return <div>Loading....</div>
+    return <PageLoadingRotation />
   }
   return (
     <div className="p-2">

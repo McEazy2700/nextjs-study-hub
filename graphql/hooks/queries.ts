@@ -4,11 +4,11 @@ import type { Query, QueryGetCourseByIdArgs, Maybe, ResourceType, QueryGetResour
 
 const QueryVal: Query = {}
 export const useUserCourses = () => {
-  return useQuery<{ courses: typeof QueryVal.userCourses }>(USER_COURSES)
+  return useQuery<{ courses: typeof QueryVal.userCourses }>(USER_COURSES, { fetchPolicy: 'no-cache'})
 }
 
 export const useUserSections = ()=>{
-  return useQuery<{ sections: typeof QueryVal.userSections }>(USER_SECTIONS)
+  return useQuery<{ sections: typeof QueryVal.userSections }>(USER_SECTIONS, { fetchPolicy: 'no-cache'})
 }
 
 export const useUserResources = ()=>{

@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: "#F48C06",
+}
 @layer components {
   .wave-bottom {
     position: absolute;

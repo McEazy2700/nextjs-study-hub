@@ -5,7 +5,14 @@ const ResourceDetails = ()=>{
   const router = useRouter()
   const { id } = router.query
 
-  return (<div>Resource {id}</div>)
+  return (
+    <form>
+      <div >
+        <label>Resource name</label>
+        <input className="bg-transparent" type='text' placeholder="Some random input"/>
+      </div>
+    </form>
+  )
 }
 
 ResourceDetails.getLayout = getSideBarLayout

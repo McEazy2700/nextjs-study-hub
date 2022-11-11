@@ -1,6 +1,6 @@
 import React from "react"
 import { useMutation } from "@apollo/client"
-import { CREATE_RESOURCE, CREATE_UPDATE_COURSE, CREATE_UPDATE_SECTION } from "@gql/requests/Mutations"
+import { CREATE_RESOURCE, CREATE_UPDATE_COURSE, CREATE_UPDATE_SECTION, DELETE_COURSE } from "@gql/requests/Mutations"
 import { 
   CourseCreateUpdateMutation,
   MutationCreateUpdateCourseArgs,
@@ -8,10 +8,11 @@ import {
   SectionCreateUpdateMutation,
   CreateUpdateResourceMuations,
   MutationCreateUpdateResourceArgs,
+  CourseDeleteMutation,
+  MutationDeleteCourseArgs,
 } from "@gql/types/graphql"
 import { appendCourse } from "@features/store/slices/courseSlice"
 import { useAppDispatch } from "@features/store/hooks"
-import { createCourseObj } from "@store/slices/courseSlice"
 import { useRouter } from "next/router"
 import { appendSection, createSectionObj } from "@features/store/slices/sectionSlice"
 import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
@@ -31,8 +32,15 @@ const defArgs = {
   endDate: null
 }
 
-export const useCreateUpdateCourse = ()=>{
+/**
+* Performs create, update, and delete mutations for a course.
+* It returns functions for performing course creation,
+* and course update, as well ass the loading state errors, 
+* and the data returned.
+*/
+export const useCourseMutations = ()=>{
   const dispatch = useAppDispatch()
+  const router = useRouter()
   const [create, { loading, data, error }] = useMutation<
     { course: CourseCreateUpdateMutation },
     MutationCreateUpdateCourseArgs
@@ -41,13 +49,21 @@ export const useCreateUpdateCourse = ()=>{
         ...defArgs
       }
     })
+  const [delCourse, { loading: dLoading, data: dData, error: dError }] = useMutation<
+    { delete: CourseDeleteMutation },
+    MutationDeleteCourseArgs>(DELETE_COURSE, {
+    variables: {
+      courseId: ''
+    }
+  })
 
-  if (error){
-    console.log(error.message)
-    // router.replace('/signout')
-  }
-  
-  const createCourse = async (refs: defRefObj, sectoinId?: string) => {
+  /**
+  * Performs course creation
+  * @param {defRefObj} refs - an object of refs to the necessary HTML input elements
+  * @param {string} sectionId - the `id` of the section this course might belogn to
+  * @returns {Promise}
+  */
+  const createCourse = async (refs: defRefObj, sectionId?: string): Promise<any> => {
     const nameVal = refs.nameRef.current.value 
     const name = nameVal && nameVal !== '' ? nameVal : null
     const descVal = refs.descRef.current.value 
@@ -63,19 +79,27 @@ export const useCreateUpdateCourse = ()=>{
         description,
         startDate,
         endDate,
-        sectionId: sectoinId
+        sectionId: sectionId
       }
     }).then(resp => {
-        if (resp.data?.course){
-          const result = resp.data?.course.course
-          dispatch(appendCourse({course: createCourseObj(result)}))
+        if (resp.data?.course.errors){
+          router.replace('/signin')
+        }
+        if (resp.data?.course.success){
+          dispatch(appendCourse(resp.data.course))
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
   }
-   const updateCourse = async (refs: defRefObj, sectoinId?: string, courseId?: string) => {
+
+
+  /**
+  * Performs course creation
+  * @param {defRefObj} refs - an object of refs to the necessary HTML input elements
+  * @param {string} sectionId - the `id` of the section this course might belogn to
+  * @param {string} courseId - the  `id` of the course the update should be performed on
+  * @returns {Promise}
+  */
+   const updateCourse = async (refs: defRefObj, courseId: string, sectionId?: string): Promise<any> => {
     const nameVal = refs.nameRef.current.value 
     const name = nameVal && nameVal !== '' ? nameVal : null
     const descVal = refs.descRef.current.value 
@@ -92,16 +116,19 @@ export const useCreateUpdateCourse = ()=>{
         startDate,
         endDate,
         courseId: courseId,
-        sectionId: sectoinId
+        sectionId: sectionId
         }
       }).then(resp => {
         dispatchCourseDetail(dispatch, resp.data?.course.course)
       })
-        .catch(err => {
-          console.log(err)
-        })
     }
-  return {createCourse, updateCourse, loading, data, error }
+
+  const deleteCourse = async (courseId: string) => {
+    return delCourse({
+      variables: {courseId}
+    })
+  }
+  return {createCourse, updateCourse, deleteCourse, loading, data, error, dLoading, dError, dData }
 }
 
 export const useCreateSection = ()=>{
@@ -116,11 +143,6 @@ export const useCreateSection = ()=>{
     }
   })
 
-  if (error){
-    console.log(error.message)
-    router.replace('/signout')
-  }
-  
   const createSection = (refs: defRefObj, sectionId?: string)=>{
     const nameVal = refs.nameRef.current.value 
     const name = nameVal && nameVal !== '' ? nameVal : null
@@ -139,13 +161,13 @@ export const useCreateSection = ()=>{
         sectionId: sectionId
       }
     }).then(res => {
+        if (res.data?.section.errors){
+          router.replace('/signin')
+        }
         if (res.data && res.data.section.success){
           const result = res.data.section.section
           dispatch(appendSection({section: createSectionObj(result)}))
         }
-      })
-      .catch(err => {
-        console.log(err)
       })
   }
   return { createSection, loading, data, error }
@@ -184,10 +206,6 @@ export const useCreateUpdateResource = (courseId: string) =>{
         ...resourceDefArgs
       }
     })
-  if (error){
-    console.log(error.message)
-    // router.replace('/signout')
-  }
   
   /**
    * Performs create mutation for course.

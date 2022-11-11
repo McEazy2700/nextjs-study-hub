@@ -13,8 +13,8 @@ const CourseList = ({onClick}: CourseListProps)=>{
 
   return (
     <ListContainer title="Courses" addItem={onClick}>
-      {courses.courses.length > 0 ?
-        courses.courses.map(course => <CourseCard key={course.course.id} course={course.course} /> )
+      {courses && courses.length > 0 ?
+        courses.map(course => course && <CourseCard key={course.id} course={course} /> )
         : <NothingHere onClick={onClick} />
       }
     </ListContainer>

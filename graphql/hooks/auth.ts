@@ -11,7 +11,6 @@ import {
   MutationRefreshTokenArgs,
   UserNode
 } from "@gql/types/graphql";
-import { error } from "console";
 
 export const useRegister = (userData: MutationRegisterArgs) => {
   return useMutation<

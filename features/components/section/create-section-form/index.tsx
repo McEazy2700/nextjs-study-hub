@@ -1,5 +1,5 @@
 import Input, { TextArea } from "@components/bank/form/input"
-import SubmitButton from "@components/bank/form/button"
+import SubmitButton from "@components/bank/form/button/Buttons"
 import Form from "@components/bank/form/form"
 import { useCreateSectionRefs } from "@utils/refs/createSectionRef"
 import React from "react"

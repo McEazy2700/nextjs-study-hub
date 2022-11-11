@@ -1,71 +1,43 @@
-import { useAppDispatch, useAppSelector } from "@features/store/hooks"
+import { useAppDispatch } from "@features/store/hooks"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/config";
-import { Maybe, CourseType } from '@gql/types/graphql'
-
-export type CourseStateType = {
-  course: {
-    id?: string,
-    name?: string,
-    description?: string,
-    startDate?: any,
-    endDate?: any,
-    sectionId?: string
-  }
-}
-
-export type CourseListType = {
-  courses: CourseStateType[]
-}
-
-const initialValue:CourseListType = {
-  courses: []
-}
+import { Maybe, CourseType, CourseCreateUpdateMutation } from '@gql/types/graphql'
 
 const coursesSlice = createSlice({
   name: 'courses',
-  initialState: initialValue,
+  initialState: {} as { courses: Maybe<Maybe<CourseType>[]> },
   reducers: {
-    setCourses: (_state, action: PayloadAction<CourseListType>) => {
-      const { courses } = action.payload
+    setCourses: (_state, action: PayloadAction<Maybe<Maybe<CourseType>[]>>) => {
       return {
-        courses: courses
+        courses: action.payload
       }
     },
-    appendCourse: (state, action: PayloadAction<CourseStateType>) => {
-      const { course } = action.payload
-      state.courses.push({course: course})
+    appendCourse: (state, action: PayloadAction<CourseCreateUpdateMutation>) => {
+      state.courses?.push(action.payload.course ?? {} as CourseType)
+    },
+    removeCourse: (state, action: PayloadAction<{ courseId: string}>) => {
+      return {
+        courses: state.courses ? [...state.courses?.filter(course => course?.id === action.payload.courseId)] : []
+      }
     }
   }
 })
 
-export const { setCourses, appendCourse } = coursesSlice.actions
+export const { setCourses, appendCourse, removeCourse } = coursesSlice.actions
 export default coursesSlice.reducer
-export const selectCourses = (state:RootState) => state.courses
-export const getCourse = (id: number) => {
-  const courses = useAppSelector(selectCourses)
-  return courses.courses.find(course => course.course.id === id.toString())
-}
+export const selectCourses = (state:RootState) => state.courses.courses
 
 type Dispatch = ReturnType<typeof useAppDispatch>
 
-export function createCourseObj(course: Maybe<CourseType> | undefined){
-  const courseObj = {
-    startDate: course?.startDate,
-    endDate: course?.endDate,
-    description: course?.description ?? '',
-    sectionId: course?.section?.id,
-    id: course?.id,
-    name: course?.name
-  }
-  return courseObj
-}
+/**
+ * Prepares and dispatches a courses list
+ * @param {Dispatch} dispatch - dispatch object of type useAppDispatch
+ * @param {Maybe<Maybe<CourseType>[]>} courses - returned course list
+ */
 export function dispatchCourseList(dispatch: Dispatch, courses: Maybe<Maybe<CourseType>[]>){
-  let courseList: CourseListType = {
-    courses: []
-  }
-  courses?.forEach(courses => {
-    courseList.courses.push({course:createCourseObj(courses)})
-  })
-  dispatch(setCourses(courseList))
+  dispatch(setCourses(courses))
+}
+
+export function dispatchRemoveCourse(dispatch: Dispatch, courseId: string){
+  dispatch(removeCourse({courseId}))
 }

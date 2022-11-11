@@ -1,11 +1,11 @@
 import ListContainer from "@components/bank/list/container"
 import NothingHere from "@components/bank/list/empty"
+import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 import ResourceCard from "@components/resources/resource-card/ResourceCard"
 import { getSideBarLayout } from "@features/layouts/hooks"
 import { useAppDispatch, useAppSelector } from "@features/store/hooks"
 import { dispatchResourceList, selectResources } from "@features/store/slices/resourceSlice"
 import { useUserResources } from "@gql/hooks/queries"
-import { Nothing } from "immer/dist/internal"
 import React, { useEffect } from "react"
 
 const Resource = ()=>{
@@ -14,13 +14,12 @@ const Resource = ()=>{
   const resources = useAppSelector(selectResources).resources
   useEffect(()=>{
     if (!loading && !error){
-      console.log(data?.resources)
       dispatchResourceList(dispatch, data?.resources)
     }
   },[data])
 
   if (loading){
-    return <div>Loading....</div>
+    return <PageLoadingRotation />
   }
   return (
     <div className="pt-6">

@@ -23,6 +23,7 @@ const SideBar = ({ children, context }: BarType)=>{
       barContext.setBarWidth(230)
     }
   }
+
   return (
     <motion.div
       animate={{ width: barContext.barWidth }}

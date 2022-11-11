@@ -23,6 +23,21 @@ module.exports = {
           bg: "#1f3a5e"
         }
       },
+      keyframes: {
+        grow: {
+          '0%': {transform: 'scale(0, 0)', opacity: '0'},
+          '100%': {transform: 'scale(1, 1)', opacity: '1'}
+        },
+        move: {
+          '0%': {transform: 'translateX(0px)'},
+          '100%': {transform: 'translateX(45px)'}
+        }
+      },
+      animation: {
+        grow: 'grow 700ms linear 0s initial reverse',
+        grow_reverse: 'grow 700ms linear 0s infinite',
+        move: 'move 700ms linear 0ms infinite'
+      },
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
       }

@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch } from "@features/store/hooks";
 import { setUser } from "@features/store/slices/userSlice";
 import { prepUserData } from "@features/store/helpers/users";
+import PageLoadingRotation from "@components/bank/loading/LoadingRotation";
 
 interface Component {
   children?: React.ReactNode | React.ReactElement
@@ -24,7 +25,7 @@ const Authorize = ({ children }: Component) => {
 
   if (loading || refreshLoading) {
     return (
-      <div>Loading....</div>
+      <PageLoadingRotation />
     )
   }
   if (!data?.user) {

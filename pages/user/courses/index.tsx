@@ -5,6 +5,7 @@ import { useAppDispatch } from "@features/store/hooks"
 import { dispatchCourseList } from "@store/slices/courseSlice"
 import { dispatchSectionList } from "@store/slices/sectionSlice"
 import { getSideBarLayout } from "@features/layouts/hooks"
+import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 
 export async function getServerSideProps(){
   return {
@@ -20,15 +21,17 @@ const Courses = () => {
   const dispatch = useAppDispatch()
   useEffect(()=>{
   },[courseData, sectionData])
+
   if (!coursesLoading && !coursesError){
     dispatchCourseList(dispatch, courseData?.courses ?? [])
   }
+  
   if (!sectionLoading && !sectionError){
     dispatchSectionList(dispatch, sectionData?.sections)
   }
 
   if (coursesLoading || sectionLoading){
-    return <div>Loading...</div>
+  return <PageLoadingRotation />
   }
 
   return (

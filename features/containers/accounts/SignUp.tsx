@@ -37,7 +37,6 @@ const SignUp: PageWithLayout = () => {
     }else {
       setEmailColor('bg-system-error')
     }
-    console.log(emailColor)
   }
   
   const signUpHandler: React.FormEventHandler = (event)=>{

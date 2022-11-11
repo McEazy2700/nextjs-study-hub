@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Form from "@components/bank/form/form"
 import Input, { FileInput, TextArea } from "@components/bank/form/input"
 import Toggle from "@components/bank/toggle/Toggle"
-import SubmitButton from '@components/bank/form/button'
+import SubmitButton from '@components/bank/form/button/Buttons'
 import { createResourceRefs } from '@features/utils/refs/createResourceRef'
 import { useCreateUpdateResource } from '@gql/hooks/mutations'
 

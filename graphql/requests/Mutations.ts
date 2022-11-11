@@ -82,6 +82,7 @@ export const CREATE_UPDATE_COURSE = gql`
         }
       }
       success
+      errors
     }
   }
 `
@@ -109,6 +110,7 @@ export const CREATE_UPDATE_SECTION = gql`
         endDate
       }
       success
+      errors
     }
   }
 `
@@ -151,6 +153,17 @@ export const CREATE_RESOURCE = gql`
         image
         video
       }
+      success
+      errors
+    }
+  }
+`
+
+export const DELETE_COURSE = gql`
+  mutation DeleteCourse ($courseId: ID!){
+    delete: deleteCourse (courseId: $courseId) {
+      success
+      errors
     }
   }
 `
