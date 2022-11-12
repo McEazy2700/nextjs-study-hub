@@ -1,6 +1,6 @@
 import React from "react"
 import { useMutation } from "@apollo/client"
-import { CREATE_RESOURCE, CREATE_UPDATE_COURSE, CREATE_UPDATE_SECTION, DELETE_COURSE } from "@gql/requests/Mutations"
+import { CREATE_RESOURCE, CREATE_UPDATE_COURSE, CREATE_UPDATE_SECTION, DELETE_COURSE, DELETE_RESOURCE } from "@gql/requests/Mutations"
 import { 
   CourseCreateUpdateMutation,
   MutationCreateUpdateCourseArgs,
@@ -247,4 +247,8 @@ export const useCreateUpdateResource = (courseId: string) =>{
     .catch()
   }
   return { createResource, loading, data, error }
+}
+
+export const useDeleteResource = () => {
+  useMutation(DELETE_RESOURCE)
 }

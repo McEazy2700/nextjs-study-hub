@@ -167,3 +167,12 @@ export const DELETE_COURSE = gql`
     }
   }
 `
+
+export const DELETE_RESOURCE = gql`
+  mutation DeleteResource ($resourceId: ID!) {
+    deleteResource (resourceId: $resourceId) {
+      success
+      errors
+    }
+  }
+`

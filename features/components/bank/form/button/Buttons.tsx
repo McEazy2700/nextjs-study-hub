@@ -3,6 +3,7 @@ import React from "react"
 interface ButtonProps {
   children?: React.ReactNode
   onClick?: React.MouseEventHandler<HTMLButtonElement>
+  className?: string;
 }
 const SubmitButton = ({children}:ButtonProps)=>{
   return (
@@ -14,11 +15,11 @@ const SubmitButton = ({children}:ButtonProps)=>{
 
 export default SubmitButton
 
-export const DeleteButton = ({ children, onClick }: ButtonProps) => {
+export const DeleteButton = ({ className, children, onClick }: ButtonProps) => {
   return (
     <button 
       onClick={onClick}
-      className="bg-red-600 flex-1 hover:bg-red-600/80 text-secondary transition-all rounded-md"
+      className={`${className} bg-red-600 flex-1 hover:bg-red-600/80 text-secondary transition-all rounded-md`}
       type="button">{children}</button>
   )
 }

@@ -25,7 +25,8 @@
       "@gql/*": ["graphql/*"],
       "@store/*": ["features/store/*"],
       "@utils/*": ["features/utils/*"],
-      "@hocs/*": ["features/hocs/*"]
+      "@hocs/*": ["features/hocs/*"],
+      "@constants/*": ["constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
