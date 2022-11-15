@@ -1,7 +1,9 @@
 import '../styles/globals.css'
 import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/thumbnail/lib/styles/index.css';
 import { ReactElement, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from 'next-themes';
 import { NextPage } from 'next'
 import { ApolloProvider } from '@apollo/client'
 import { Provider } from 'react-redux'
@@ -23,9 +25,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.0.279/pdf.worker.min.js">
-          <div className="dark:text-white text-sm md:text-base font-poppins dark:bg-dark-bg">
-            {getLayout(<Component {...pageProps} />)}
-          </div>
+          <ThemeProvider enableSystem={true} attribute="class">
+            <div className="dark:text-white text-sm md:text-base font-poppins dark:bg-dark-bg">
+              {getLayout(<Component {...pageProps} />)}
+            </div>
+          </ThemeProvider>
         </Worker>
       </Provider>
     </ApolloProvider>

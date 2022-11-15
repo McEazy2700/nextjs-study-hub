@@ -10,6 +10,7 @@ import { setUser } from "@features/store/slices/userSlice"
 import { prepUserData } from "@features/store/helpers/users"
 import { setAuthToken } from "@features/utils/cookies"
 import Label from "@components/bank/label"
+import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 
 const initialInput:MutationTokenAuthArgs = {
   email: '',
@@ -48,7 +49,7 @@ const SignInPage = ()=>{
       })
   }
   if (loading){
-    return <div>Loading....</div>
+    return <PageLoadingRotation />
   }
   if (error) {
     return (

@@ -2,7 +2,8 @@ import React from "react"
 
 interface FormProps {
   children?: React.ReactNode;
-  onSubmit?: React.FormEventHandler<HTMLFormElement>
+  onSubmit?: React.FormEventHandler<HTMLFormElement>;
+  className?: string;
 }
 const Form = ({ onSubmit, children }: FormProps)=>{
 
@@ -17,12 +18,12 @@ const Form = ({ onSubmit, children }: FormProps)=>{
 
 export default Form
 
-export const FormFull = ({ onSubmit, children }: FormProps)=>{
+export const FormFull = ({ onSubmit, children, className }: FormProps)=>{
 
   return (    
     <form 
       onSubmit={onSubmit}
-      className="flex dark:text-white md:flex-col w-full rounded-lg bg-white dark:bg-secondary/5 p-2 gap-2">
+      className={`${className} flex dark:text-white md:flex-col w-full rounded-lg bg-white dark:bg-secondary/5 p-2 gap-2`}>
       {children}
     </form>
 )

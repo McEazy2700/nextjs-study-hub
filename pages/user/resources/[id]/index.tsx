@@ -1,6 +1,5 @@
-import Form from "@components/bank/form/form"
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
-import { getSideBarLayout } from "@features/layouts/hooks"
+import { getSideBarLayout } from "@features/layouts/hooks/getSidebarLayout"
 import { useAppDispatch } from "@features/store/hooks"
 import { dispatchResourceDetail } from "@features/store/slices/resourceDetailSlice"
 import { useGetResourceByID } from "@gql/hooks/queries"
@@ -23,7 +22,7 @@ const ResourceDetails = ()=>{
     return <PageLoadingRotation />
   }
   return (
-    <div className="py-4 pt-10">
+    <div className="py-4">
       <ResourcePage />
     </div>
   )

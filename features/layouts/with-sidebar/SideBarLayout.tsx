@@ -8,6 +8,7 @@ import { GiBookshelf } from 'react-icons/gi'
 import { AiFillSchedule } from 'react-icons/ai'
 import { SiTodoist } from 'react-icons/si'
 import Authorize from "../accounts/auth/Authorize"
+import NavBar from "@components/navigation/NavBar"
 
 interface WithSideBarTypes {
   children: React.ReactElement | React.ReactNode
@@ -45,8 +46,9 @@ const WithSidebar = ({ children }: WithSideBarTypes) => {
             <SideBarItem icon={<SiTodoist />} href="/user/todos" text="Todo" context={SideBarContext}/>
           </SideBar>
           <motion.main
-            className="min-h-screen min-w-screen"
+            className="min-h-screen relative pt-12 min-w-screen"
             animate={{ marginLeft: context.barWidth + 30 }}>
+            <NavBar />
             {children}
           </motion.main>
         </div>

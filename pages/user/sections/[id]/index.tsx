@@ -1,4 +1,4 @@
-import { getSideBarLayout } from "@features/layouts/hooks"
+import { getSideBarLayout } from "@features/layouts/hooks/getSidebarLayout"
 import { useRouter } from "next/router"
 
 const SectionDetail = ()=>{

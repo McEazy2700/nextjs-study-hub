@@ -1,9 +1,11 @@
 import ListContainer from "@components/bank/list/container"
 import NothingHere from "@components/bank/list/empty"
+import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 import Modal from "@features/hocs/modal/Modal"
 import { useAppDispatch, useAppSelector } from "@features/store/hooks"
 import { dispatchResourceList, selectResources } from "@features/store/slices/resourceSlice"
 import { useGetResourceByCourseID } from "@gql/hooks/queries"
+import { ResourceType } from "@gql/types/graphql"
 import { useEffect, useState } from "react"
 import CreateResourceForm from "../create-resource/CreateResourceForm"
 import ResourceCard from "../resource-card/ResourceCard"
@@ -25,7 +27,7 @@ const CourseResourcesList = ({ courseId }: ResourcesListProps)=>{
     }
   },[data])
   if (loading){
-    return <div>Loading....</div>
+    return <PageLoadingRotation />
   }
   return (
     <>
@@ -33,8 +35,8 @@ const CourseResourcesList = ({ courseId }: ResourcesListProps)=>{
       <CreateResourceForm close={closeForm} courseId={courseId}/>
     </Modal>
     <ListContainer addItem={openForm} title="Course resources">
-      {resources.length > 0 ?
-      resources.map(resource => <ResourceCard key={resource.resource.id} resource={resource}/>)
+      {resources && resources.length > 0 ?
+      resources.map(resource => <ResourceCard key={resource?.id} resource={resource ?? {} as ResourceType}/>)
       : <NothingHere onClick={openForm}/>}
     </ListContainer>
     </>

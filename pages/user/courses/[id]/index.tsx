@@ -1,7 +1,7 @@
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 import CourseUpdateForm from "@components/course/course-update-form/UpdateForm"
 import CourseResourcesList from "@components/resources/resources-list/ResourcesList"
-import { getSideBarLayout } from "@features/layouts/hooks"
+import { getSideBarLayout } from "@features/layouts/hooks/getSidebarLayout"
 import { useAppDispatch } from "@features/store/hooks"
 import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
 import { useGetCourseByID } from "@gql/hooks/queries"

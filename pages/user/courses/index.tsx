@@ -4,7 +4,7 @@ import { useUserCourses, useUserSections } from "@gql/hooks/queries"
 import { useAppDispatch } from "@features/store/hooks"
 import { dispatchCourseList } from "@store/slices/courseSlice"
 import { dispatchSectionList } from "@store/slices/sectionSlice"
-import { getSideBarLayout } from "@features/layouts/hooks"
+import { getSideBarLayout } from "@features/layouts/hooks/getSidebarLayout"
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 
 export async function getServerSideProps(){

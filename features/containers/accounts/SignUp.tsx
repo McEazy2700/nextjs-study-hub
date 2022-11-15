@@ -7,6 +7,7 @@ import { MutationRegisterArgs } from '@gql/types/graphql'
 import ErrorMessage from '@components/bank/errors'
 import { setAuthToken } from '@features/utils/cookies'
 import { useRouter } from 'next/router'
+import PageLoadingRotation from '@components/bank/loading/LoadingRotation'
 
 const initialData: MutationRegisterArgs = {
   username: '',
@@ -58,7 +59,7 @@ const SignUp: PageWithLayout = () => {
       })
   }
   if (loading) {
-    return <div>Loadding.....</div>
+    return <PageLoadingRotation />
   }
   return (
     <div className=''>

@@ -11,11 +11,14 @@ const resourceDetailSlice = createSlice({
       const course = action.payload ?? {} as Maybe<ResourceType>
       const newState = Object.assign(state, course)
       return newState
+    },
+    clearCurrResource: (_state, _action) => {
+      return {} as ResourceType
     }
   }
 })
 
-export const { setCurrResource } = resourceDetailSlice.actions
+export const { setCurrResource, clearCurrResource } = resourceDetailSlice.actions
 export default resourceDetailSlice.reducer
 export const selectResource = (state: RootState) => state.resourceDetail
 

@@ -10,16 +10,21 @@ import { dispatchCourseDetail, selectCurrCourse } from "@features/store/slices/c
 import { useRouter } from "next/router"
 import { dispatchRemoveCourse } from "@features/store/slices/courseSlice"
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
+import Confirmation from "@components/bank/dialogs/Confirmation"
 
 interface UpdateCourseProps {
 }
 const CourseUpdateForm = ({}: UpdateCourseProps)=>{
   const {updateCourse, deleteCourse, loading, data, dLoading } = useCourseMutations()
   const [sectionId, setSectionId] = useState('')
+  const [delOpen, setDelOpen] = useState(false)
   const courseRefs = useCreateCourseRefs()
   const dispatch = useAppDispatch()
   const course = useAppSelector(selectCurrCourse)
   const router = useRouter()
+
+  const openDel = () => setDelOpen(true)
+  const closeDel = () => setDelOpen(false)
 
   const updateCourseHandler: React.FormEventHandler = (event)=>{
     event.preventDefault()
@@ -28,6 +33,7 @@ const CourseUpdateForm = ({}: UpdateCourseProps)=>{
     })
   }
   const deleteCourseHandler: React.MouseEventHandler = ()=>{
+    closeDel()
     deleteCourse(course.id ?? '').then(resp => {
       if (resp.data?.delete.success){
         dispatchRemoveCourse(dispatch, course.id)
@@ -67,10 +73,16 @@ const CourseUpdateForm = ({}: UpdateCourseProps)=>{
           </div>
           <div className="flex gap-2">
             <SubmitButton>Save</SubmitButton>
-            <DeleteButton onClick={deleteCourseHandler}>Delete</DeleteButton>
+            <DeleteButton onClick={openDel}>Delete</DeleteButton>
           </div>
         </div>
       </div>
+        <Confirmation
+        isOpen={delOpen}
+        setIsOpen={setDelOpen}
+        variant='delete'
+        onConfirm={deleteCourseHandler}
+        />
    </FormFull>
   )
 }

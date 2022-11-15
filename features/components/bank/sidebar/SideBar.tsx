@@ -1,4 +1,4 @@
-import { SideBarContextType } from "@features/layouts/with-sidebar"
+import { SideBarContextType } from "@features/layouts/with-sidebar/SideBarLayout"
 import { motion } from "framer-motion"
 import React from "react"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa'

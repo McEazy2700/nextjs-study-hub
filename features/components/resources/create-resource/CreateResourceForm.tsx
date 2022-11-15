@@ -5,6 +5,7 @@ import Toggle from "@components/bank/toggle/Toggle"
 import SubmitButton from '@components/bank/form/button/Buttons'
 import { createResourceRefs } from '@features/utils/refs/createResourceRef'
 import { useCreateUpdateResource } from '@gql/hooks/mutations'
+import PageLoadingRotation from '@components/bank/loading/LoadingRotation'
 
 interface CreateResourceFormProps {
   courseId: string,
@@ -21,7 +22,7 @@ const CreateResourceForm = ({ close, courseId }: CreateResourceFormProps)=>{
     close()
   }
   if (loading){
-    return <div>Loading.....</div>
+    return <PageLoadingRotation />
   }
   return (
     <Form onSubmit={resourceCreateHanlder}>

@@ -12,7 +12,7 @@ export const useUserSections = ()=>{
 }
 
 export const useUserResources = ()=>{
-  return useQuery<{ resources: typeof QueryVal.userResources }>(USER_RESOURCES)
+  return useQuery<{ resources: typeof QueryVal.userResources }>(USER_RESOURCES, { fetchPolicy: 'no-cache'})
 }
 
 export const useGetCourseByID = (id: string)=>{
@@ -31,7 +31,8 @@ export const useGetResourceByCourseID = (courseId: string) => {
     QueryGetResourcesByCourseIdArgs>(GET_RESOURCE_BY_COURSE_ID, {
       variables: {
         courseId,
-      }
+      },
+      fetchPolicy: 'no-cache'
     })
 }
 

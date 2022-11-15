@@ -23,3 +23,23 @@ export const DeleteButton = ({ className, children, onClick }: ButtonProps) => {
       type="button">{children}</button>
   )
 }
+
+export const UpdateButton = (props: ButtonProps) => {
+  const { className, children, onClick } = props
+  return (
+    <button 
+      onClick={onClick}
+      className={`${className} bg-orange-600 flex-1 hover:bg-orange-600/80 text-secondary transition-all rounded-md`}
+      type="button">{children}</button>
+  )
+}
+
+export const CancelButton = (props: ButtonProps) => {
+  const { className, children, onClick } = props
+  return (
+    <button 
+      onClick={onClick}
+      className={`${className} bg-yellow-600 flex-1 hover:bg-yellow-600/80 text-secondary transition-all rounded-md`}
+      type="button">{children}</button>
+  )
+}

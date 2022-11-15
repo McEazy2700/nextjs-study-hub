@@ -6,9 +6,11 @@ interface CourseCardProps {
 }
 const CourseCard = ({ course }: CourseCardProps)=>{
   return (
-    <Link className="p-4 shadow shadow-dark-accent/20 bg-secondary dark:bg-secondary/50 dark:text-secondary min-w-[15rem] flex-1 text-dark-accent rounded-md" href={`/user/courses/${course.id}/`}>
-      <h3 className="text-lg font-semibold">{course.name}</h3>
-      <p className="overflow-hidden text-ellipsis max-h-[2ch] max-w-full whitespace-nowrap">{course.description}</p>
+    <Link 
+      className="p-4 flex text-dark-accent hover:border-dark-accent/70 hover:dark:border-secondary/30 transition-all dark:text-secondary shadow border border-dark-accent/50 min-h-[10rem] flex-col justify-end hover:bg-secondary/5 items-baseline overflow-hidden gap-1 text-ellipsis shadow-dark-accent/20 bg-dark-accent/10 min-w-[15rem] flex-1 rounded-md" 
+      href={`/user/courses/${course.id}/`}>
+      <p className="overflow-hidden text-ellipsis max-w-full text-sm max-h-20">{course.description}</p>
+      <h3 className="overflow-hidden text-ellipsis font-semibold text-lg max-w-full whitespace-nowrap">{course.name}</h3>
     </Link>
   )
 }

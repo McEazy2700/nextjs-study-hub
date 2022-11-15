@@ -10,13 +10,15 @@ import {
   MutationCreateUpdateResourceArgs,
   CourseDeleteMutation,
   MutationDeleteCourseArgs,
+  ResourceDeleteMuation,
+  MutationDeleteResourceArgs,
 } from "@gql/types/graphql"
 import { appendCourse } from "@features/store/slices/courseSlice"
 import { useAppDispatch } from "@features/store/hooks"
 import { useRouter } from "next/router"
 import { appendSection, createSectionObj } from "@features/store/slices/sectionSlice"
 import { dispatchCourseDetail } from "@features/store/slices/courseDetailSlice"
-import { appendResource, createResourceObj } from "@features/store/slices/resourceSlice"
+import { appendResource } from "@features/store/slices/resourceSlice"
 
 interface defRefObj {
   nameRef: React.MutableRefObject<HTMLInputElement>
@@ -240,8 +242,7 @@ export const useCreateUpdateResource = (courseId: string) =>{
       }
     }).then(resp => {
         if (resp.data?.resource){
-          const resource = resp.data.resource.resource
-          dispatch(appendResource(createResourceObj(resource)))
+          dispatch(appendResource(resp.data.resource))
         }
       })
     .catch()
@@ -250,5 +251,7 @@ export const useCreateUpdateResource = (courseId: string) =>{
 }
 
 export const useDeleteResource = () => {
-  useMutation(DELETE_RESOURCE)
+  return useMutation<
+    { delete: ResourceDeleteMuation },
+    MutationDeleteResourceArgs>(DELETE_RESOURCE)
 }
