@@ -3,7 +3,7 @@ import Chat from "@components/landing-page/blocks/floating-chat"
 const Hero = ()=>{
 
   return (
-    <section className="relative min-w-[100vw] overflow-x-hidden text-black bg-accent p-14 grid md:grid-cols-2">
+    <section className="relative min-w-[100vw] overflow-x-hidden text-black bg-accent p-4 sm:p-6 md:p-14 grid md:grid-cols-2">
       <div id="hero-text" className="h-full gap-3 flex flex-col items-start justify-center">
         <h1 className="text-3xl text-tatiary font-bold text-start">
           <span className="text-primary">Sharing </span>Knowledge has never been easier.
@@ -15,15 +15,14 @@ const Hero = ()=>{
         <div className="">
           <img src="/assets/images/student.png" alt="A group of students studying" />
         </div>
-        <div className="absolute top-1/4 right-[60%]">
+        <div className="absolute bottom-1/3 sm:top-1/4 sm:right-[60%]">
           <Chat
             width="20rem"
             pointRight
             imageUrl="/assets/images/chat-profile.png"
             text="Yo, checkout this Physics textbook I found online."/>
         </div>
-        <div className="absolute top-[15%] left-[55%]">
-          <Chat
+        <div className="absolute top-1/3 sm:top-[15%] sm:left-[55%]"> <Chat
             width="10rem"
             imageUrl="/assets/images/female-profile.png"
             text="Hey, have you seen this lecture video."/>
