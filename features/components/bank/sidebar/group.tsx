@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from 'framer-motion'
-import { SideBarContextType } from "@features/layouts/with-sidebar"
+import { SideBarContextType } from "@features/layouts/with-sidebar/SideBarLayout"
 
 interface GroupType {
   children?: React.ReactNode | React.ReactElement;
