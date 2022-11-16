@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { SideBarContextType } from "@features/layouts/with-sidebar/SideBarLayout"
 import { motion } from "framer-motion"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa'
@@ -14,6 +14,7 @@ interface BarType {
 
 const MobileSideBar = ({ children, context }: BarType)=>{
   const barContext = React.useContext(context)
+  const barRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const expandHandler = ()=>{
     if (barContext.isOpen){
       barContext.setIsOpen(false)
@@ -24,8 +25,25 @@ const MobileSideBar = ({ children, context }: BarType)=>{
     }
   }
 
+  useEffect(()=>{
+    console.log(barRef.current)
+    const bodyPage = document.getElementById('__next')
+    const closeBar = (event: MouseEvent)=> {
+      if (event.target != barRef.current){
+        if (barContext.isOpen){
+          barContext.setIsOpen(false)
+        }
+      }
+    }
+    bodyPage?.addEventListener('click', closeBar)
+    return ()=> {
+      bodyPage?.removeEventListener('click', closeBar)
+    }
+  },[])
+
   return (
     <motion.div
+      ref={barRef}
       animate={{ translateX: !barContext.isOpen ? '-102%' : 0  }}
       transition={{ duration: 0.2 }}
       className="min-h-[99vh] z-50 m-1 w-60 rounded-md fixed top-0 left-0 bg-dark-accent text-white">
