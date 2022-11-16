@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "DISABLE_ESLINT_PLUGIN=true next dev",
+    "build": "DISABLE_ESLINT_PLUGIN=true next build",
+    "start": "DISABLE_ESLINT_PLUGIN=true next start",
+    "lint": "DISABLE_ESLINT_PLUGIN=true next lint",
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
