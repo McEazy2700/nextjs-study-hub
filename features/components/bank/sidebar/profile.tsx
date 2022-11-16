@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { SideBarContextType } from "@features/layouts/with-sidebar"
+import { SideBarContextType } from "@features/layouts/with-sidebar/SideBarLayout"
 import { useAppSelector } from '@features/store/hooks';
 import { selectUser } from '@features/store/slices/userSlice';
 import Link from 'next/link';
