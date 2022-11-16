@@ -7,14 +7,6 @@ import { dispatchSectionList } from "@store/slices/sectionSlice"
 import { getSideBarLayout } from "@features/layouts/hooks/getSidebarLayout"
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 
-export async function getServerSideProps(){
-  return {
-    props: {
-      courses: []
-    }
-  }
-}
-
 const Courses = () => {
   const { loading: coursesLoading, data: courseData, error: coursesError } = useUserCourses()
   const { loading: sectionLoading, data: sectionData, error: sectionError } = useUserSections()
