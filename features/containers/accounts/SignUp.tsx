@@ -8,6 +8,7 @@ import ErrorMessage from '@components/bank/errors'
 import { setAuthToken } from '@features/utils/cookies'
 import { useRouter } from 'next/router'
 import PageLoadingRotation from '@components/bank/loading/LoadingRotation'
+import AuthWraper from '@components/bank/wrappers/AuthWraper'
 
 const initialData: MutationRegisterArgs = {
   username: '',
@@ -63,7 +64,7 @@ const SignUp: PageWithLayout = () => {
   }
   return (
     <div className=''>
-      <div className='bg-accent items-center justify-center min-h-screen h-full flex p-10'>
+      <AuthWraper>
         <form 
           onSubmit={signUpHandler}
           className='flex flex-col items-center justify-center gap-4 border-2 p-5 rounded-[3rem]'>
@@ -123,7 +124,7 @@ const SignUp: PageWithLayout = () => {
             className='bg-primary p-5 w-full rounded-[5rem] active:bg-primary/60 hover:bg-primary/60 transition-all'>Sign up</button>
           <p className='text-dark-bg'>Already have an account? <Link className='text-primary' href="/signin">Sign in</Link></p>
         </form>
-      </div>
+      </AuthWraper>
     </div>
   )
 }

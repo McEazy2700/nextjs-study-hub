@@ -11,6 +11,7 @@ import { prepUserData } from "@features/store/helpers/users"
 import { setAuthToken } from "@features/utils/cookies"
 import Label from "@components/bank/label"
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
+import AuthWraper from "@components/bank/wrappers/AuthWraper"
 
 const initialInput:MutationTokenAuthArgs = {
   email: '',
@@ -60,7 +61,7 @@ const SignInPage = ()=>{
   return (
 
     <div className=''>
-      <div className='bg-accent items-center justify-center min-h-screen h-full flex p-10'>
+      <AuthWraper>
         <form 
           onSubmit={signInHandler}
           className='flex flex-col items-center justify-center gap-4 border-2 p-5 rounded-[3rem]'>
@@ -97,7 +98,7 @@ const SignInPage = ()=>{
             className='bg-primary p-5 w-full rounded-[5rem] active:bg-primary/60 hover:bg-primary/60 transition-all'>Sign in</button>
           <p className='text-dark-bg'>Do not have an account? <Link className='text-primary' href="/signup">Sign up</Link></p>
         </form>
-      </div>
+      </AuthWraper>
     </div>
   )
 }
