@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link";
 import { motion } from 'framer-motion'
-import { SideBarContextType } from "@features/layouts/with-sidebar"
+import { SideBarContextType } from "@features/layouts/with-sidebar/SideBarLayout"
 
 interface ItemType {
   context: React.Context<SideBarContextType>;
