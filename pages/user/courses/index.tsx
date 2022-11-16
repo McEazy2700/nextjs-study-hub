@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import CoursesPage from "@containers/courses/CoursePage"
 import { useUserCourses, useUserSections } from "@gql/hooks/queries"
 import { useAppDispatch } from "@features/store/hooks"
@@ -11,8 +11,6 @@ const Courses = () => {
   const { loading: coursesLoading, data: courseData, error: coursesError } = useUserCourses()
   const { loading: sectionLoading, data: sectionData, error: sectionError } = useUserSections()
   const dispatch = useAppDispatch()
-  useEffect(()=>{
-  },[courseData, sectionData])
 
   if (!coursesLoading && !coursesError){
     dispatchCourseList(dispatch, courseData?.courses ?? [])

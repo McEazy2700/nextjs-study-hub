@@ -1,3 +1,4 @@
+import React from 'react'
 import SignInPage from "@containers/accounts/SignIn"
 
 const SignIn = ()=>{

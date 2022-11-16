@@ -1,7 +1,7 @@
+import React, { ReactElement, ReactNode } from 'react'
 import '../styles/globals.css'
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/thumbnail/lib/styles/index.css';
-import { ReactElement, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes';
 import { NextPage } from 'next'
@@ -11,7 +11,7 @@ import { store } from '@features/store/config'
 import client from '@gql/Setup'
 import { Worker } from '@react-pdf-viewer/core'
 
-export type PageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type PageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 

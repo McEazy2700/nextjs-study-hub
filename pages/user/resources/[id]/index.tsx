@@ -1,10 +1,10 @@
+import React, { useEffect } from "react"
 import PageLoadingRotation from "@components/bank/loading/LoadingRotation"
 import { getSideBarLayout } from "@features/layouts/hooks/getSidebarLayout"
 import { useAppDispatch } from "@features/store/hooks"
 import { dispatchResourceDetail } from "@features/store/slices/resourceDetailSlice"
 import { useGetResourceByID } from "@gql/hooks/queries"
 import { useRouter } from "next/router"
-import { useEffect } from "react"
 import ResourcePage from '@containers/resources/ReourcesPage'
 
 const ResourceDetails = ()=>{
