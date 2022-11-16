@@ -12,7 +12,7 @@ interface BarType {
   children?: React.ReactNode | React.ReactElement
 }
 
-const SideBar = ({ children, context }: BarType)=>{
+const MobileSideBar = ({ children, context }: BarType)=>{
   const barContext = React.useContext(context)
   const expandHandler = ()=>{
     if (barContext.isOpen){
@@ -26,11 +26,11 @@ const SideBar = ({ children, context }: BarType)=>{
 
   return (
     <motion.div
-      animate={{ width: barContext.barWidth }}
+      animate={{ translateX: !barContext.isOpen ? '-102%' : 0  }}
       transition={{ duration: 0.2 }}
-      className="min-h-[99vh] m-1 rounded-md fixed top-0 left-0 bg-dark-accent text-white">
+      className="min-h-[99vh] z-50 m-1 w-60 rounded-md fixed top-0 left-0 bg-dark-accent text-white">
       <div className="min-h-full p-3 relative min-w-full">
-        <button className="absolute top-1 bg-dark-accent p-1.5 rounded-r-2xl -right-6" type="button" onClick={expandHandler}>
+        <button className="absolute -bottom-32 bg-dark-accent p-3 pl-6 rounded-r-full -right-10" type="button" onClick={expandHandler}>
             {barContext.isOpen ? 
             <motion.span
               animate={{ opacity: 1 }}
@@ -50,4 +50,4 @@ const SideBar = ({ children, context }: BarType)=>{
   )
 }
 
-export default SideBar
+export default MobileSideBar
