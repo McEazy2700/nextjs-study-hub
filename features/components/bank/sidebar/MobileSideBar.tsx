@@ -44,7 +44,7 @@ const MobileSideBar = ({ children, context }: BarType)=>{
   return (
     <motion.div
       ref={barRef}
-      animate={{ translateX: !barContext.isOpen ? '-0%' : 0  }}
+      animate={{ translateX: !barContext.isOpen ? '-102%' : 0  }}
       transition={{ duration: 0.2 }}
       className="min-h-[99vh] z-50 m-1 w-60 rounded-md fixed top-0 left-0 bg-dark-accent text-white">
       <div className="min-h-full p-3 relative min-w-full">
