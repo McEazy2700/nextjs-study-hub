@@ -14,8 +14,8 @@ const CoursesPage = () => {
   const courseCreateOpen = ()=>setCourseCreateIsOpen(true)
   const courseCreateClose = ()=>setCourseCreateIsOpen(false)
   return (
-  <div className='flex w-f flex-col relative'>
-    <div>
+  <div className='flex w-f flex-col relative pt-5'>
+    <div className='flex lg:mr-5 flex-col gap-3'>
       <SectionList addItem={sectionCreateOpen} />
       <CourseList onClick={courseCreateOpen} />
       <Modal title='Create Section' onClose={sectionCreateClose} open={sectionCreateIsOpen}>

@@ -24,7 +24,7 @@ const CourseDetails = ()=>{
     return <PageLoadingRotation />
   }
   return (
-    <div className="p-2">
+    <div className="pt-4 md:mr-4 flex flex-col gap-5">
       <CourseUpdateForm />
       <CourseResourcesList courseId={data?.course?.id ?? ''} />
     </div>

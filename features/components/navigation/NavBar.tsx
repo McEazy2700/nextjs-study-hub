@@ -18,7 +18,7 @@ const NavBar = () => {
   }
   return (
     <nav
-      className='flex bg-dark-accent justify-between items-center rounded-md p-0.5 absolute w-[98.5%] top-1'>
+      className='flex bg-dark-accent justify-between items-center rounded-l-3xl lg:rounded-l-md rounded-md ml-9 lg:ml-0 p-0.5 absolute w-[98.5%] top-1'>
       <NavSearch />
       <button className={`p-2 dark:hover:bg-secondary dark:hover:text-dark-bg aspect-square flex items-center justify-center w-9 h-9 hover:bg-dark-accent/90 hover:text-secondary transition-all rounded-full`} onClick={handleSetTheme}>
         {darkTheme ?

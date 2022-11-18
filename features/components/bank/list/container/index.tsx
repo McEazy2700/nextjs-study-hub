@@ -8,12 +8,12 @@ interface ListContainerProps {
 }
 const ListContainer = ({ maxHeight, title, addItem, children }: ListContainerProps)=>{
   return (
-      <div className="flex flex-col gap-2 p-2 bg-dark-accent/20 dark:bg-dark-accent/50 rounded-lg m-4 ml-0">
+      <div className="flex flex-col gap-2 p-2 bg-dark-accent/20 dark:bg-dark-accent/50 rounded-lg ">
       <div className="relative flex">
         <h2 className="font-semibold text-lg">{title}</h2>
       {addItem && 
         <button 
-        className='bg-primary z-50 p-2 max-w-[8rem] rounded-3xl absolute right-2 min-w-[6rem] mt-1' 
+        className='bg-primary z-30 p-2 max-w-[8rem] rounded-3xl absolute right-2 min-w-[6rem] mt-1' 
         onClick={addItem}>Add +</button>
       }
       </div>

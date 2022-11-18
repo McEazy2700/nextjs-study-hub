@@ -46,15 +46,8 @@ const MobileSideBar = ({ children, context }: BarType)=>{
       ref={barRef}
       animate={{ translateX: !barContext.isOpen ? '-102%' : 0  }}
       transition={{ duration: 0.2 }}
-      className="min-h-[99vh] z-50 m-1 w-60 rounded-md fixed top-0 left-0 bg-dark-accent text-white">
-      <div className="min-h-full p-3 relative min-w-full">
-          {children}
-      </div>
-      <div className="absolute bottom-1 flex flex-col">
-        <SideBarProfile context={context}/>
-        <SideBarItem className="ml-2" href="/signout" text="Sign Out" icon={<FaSignOutAlt />} context={context}/>
-      </div>
-      <button className="absolute bottom-1 bg-dark-accent p-3 pl-6 rounded-r-full -right-10" type="button" onClick={expandHandler}>
+      className="min-h-[99vh] z-50 m-1 w-60 rounded-md fixed top-0 left-0 bg-dark-accent text-secondary">
+      <button className="absolute top-0.5 bg-gradient-to-r from-dark-accent to-dark-accent/50 p-3 pl-6 rounded-r-full -right-10" type="button" onClick={expandHandler}>
           {barContext.isOpen ? 
           <motion.span
             animate={{ opacity: 1 }}
@@ -64,6 +57,14 @@ const MobileSideBar = ({ children, context }: BarType)=>{
             ><FaAngleDoubleRight /></motion.span>
           }
       </button>
+
+      <div className="min-h-full p-3 relative min-w-full">
+          {children}
+      </div>
+      <div className="absolute bottom-1 flex flex-col">
+        <SideBarProfile context={context}/>
+        <SideBarItem className="ml-2" href="/signout" text="Sign Out" icon={<FaSignOutAlt />} context={context}/>
+      </div>
     </motion.div>
   )
 }
